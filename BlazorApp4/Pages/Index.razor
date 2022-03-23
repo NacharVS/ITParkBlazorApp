@@ -1,0 +1,41 @@
+﻿@page "/"
+
+
+<h1>Calculator</h1>
+<h5>@currentCount</h5>
+
+
+<button class="btn btn-primary" @onclick="AddDigit1">1</button>
+<button class="btn btn-primary" @onclick="AddDigit2">2</button>
+<button class="btn btn-primary" @onclick="AddDigit3">3</button>
+<button class="btn btn-primary" @onclick="Plus">+</button>
+<br />
+<button class="btn btn-primary" @onclick="Result">Result</button>
+
+@code
+    {
+    private string currentCount;
+    private int buffer;
+
+    private void AddDigit1()
+    {
+        currentCount += "1";
+    }
+    private void AddDigit2()
+    {
+        currentCount += "2";
+    }
+    private void AddDigit3()
+    {
+        currentCount += "3";
+    }
+    private void Plus()
+    {
+        buffer += Convert.ToInt32(currentCount);
+        currentCount = "";
+    }
+    private void Result()
+    {
+        currentCount = (Convert.ToInt32(currentCount) + buffer).ToString();
+    }
+}
