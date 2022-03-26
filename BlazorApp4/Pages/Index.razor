@@ -109,16 +109,16 @@
     { switch (operation)
             {
                 case "+":
-                   currentCount = (Convert.ToDouble(currentCount) + buffer).ToString();
+                   currentCount = (buffer + Convert.ToDouble(currentCount)).ToString();
                                    break;
                 case "-":
-                    currentCount = (Convert.ToDouble(currentCount) - buffer).ToString();
+                    currentCount = (buffer - Convert.ToDouble(currentCount)).ToString();
                                         break;
                 case "*":
-                   currentCount = (Convert.ToDouble(currentCount) * buffer).ToString();
+                   currentCount = (buffer * Convert.ToDouble(currentCount)).ToString();
                     break;
                 case "/":
-                    currentCount = (Convert.ToDouble(currentCount) / buffer).ToString();
+                    currentCount = (buffer / Convert.ToDouble(currentCount)).ToString();
                     break;
 
             }
