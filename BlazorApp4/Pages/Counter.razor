@@ -1,10 +1,15 @@
 ﻿@page "/counter"
 
-<h1>Counter</h1>
+<h6>Counter</h6>
 
+@for (int i = 0; i < 10; i++)
+{
 <p>Current count: @currentCount</p>
+}
 
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+<br>
+<input @bind-value="currentCount"/>
 <ButtonGroup content="list"></ButtonGroup>
 
 
