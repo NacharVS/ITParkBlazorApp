@@ -1,0 +1,9 @@
+﻿@foreach(var item in content)
+            {
+                <Button ButtonContent=@item/>
+            }
+
+@code {
+    [Parameter]
+    public List<string> content { get; set; }
+}
