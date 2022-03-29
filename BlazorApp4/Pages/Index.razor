@@ -1,127 +1,27 @@
 ﻿@page "/"
+@using BlazorApp4.Data
+@using MongoDB.Driver
+<h3>Registration</h3>
 
-<h1>Calculator</h1>
-<h2>@currentCount</h2>
-
-
-
-<button class = "btn btn-primary" @onclick = "AddDigit">1</button>
-<button class = "btn btn-primary" @onclick = "AddDigit2">2</button>
-<button class = "btn btn-primary" @onclick = "AddDigit3">3</button>
-<button class = "btn btn-primary" @onclick = "Plus" >+</button>
-<br/>
-<button class = "btn btn-primary" @onclick = "AddDigit4">4</button>
-<button class = "btn btn-primary" @onclick = "AddDigit5">5</button>
-<button class = "btn btn-primary" @onclick = "AddDigit6">6</button>
-<button class = "btn btn-primary" @onclick = "Minus" >-</button>
-<br/>
-<button class = "btn btn-primary" @onclick = "AddDigit7">7</button>
-<button class = "btn btn-primary" @onclick = "AddDigit8">8</button>
-<button class = "btn btn-primary" @onclick = "AddDigit9">9</button>
-<button class = "btn btn-primary" @onclick = "Delete" >/</button>
-<br/>
-<button class = "btn btn-primary" @onclick = "AddDigitC">C</button>
-<button class = "btn btn-primary" @onclick = "AddDigit0">0</button>
-<button class = "btn btn-primary" @onclick = "Res" >=</button>
-<button class = "btn btn-primary" @onclick = "Multiplication" >*</button>
-<br/>
-
+<input type="text" name="surname" placeholder="Surname" required @bind-value="surName"/>
+<br />
+<br />
+<input type="text" name="name" placeholder="Name" required @bind-value="name"/>
+<br />
+<br />
+<input type="text" name="secondName" placeholder="Second name" required @bind-value="secondName"/>
+<br />
+<br />
+<input type="text" name="login" placeholder="Login" required @bind-value="login"/>
+<br />
+<br />
+<Button ButtonContent="Registrated" @*@onclick="MongoDB.AddToDataBase(new User(surName,name,secondName,login))"*@/>
+<br />
 
 @code{
-    private string currentCount;
-    private double buffer;
-    private string operation;
-
-     private void AddDigitC()
-    {
-        currentCount ="";
-    }
-    private void AddDigit0()
-    {
-        currentCount +="0";
-    }
-    private void AddDigit()
-    {
-        currentCount +="1";
-    }
-    private void AddDigit2()
-    {
-        currentCount +="2";
-    }
-    private void AddDigit3()
-    {
-        currentCount +="3";
-    }
-    private void AddDigit4()
-    {
-        currentCount +="4";
-    }
-    private void AddDigit5()
-    {
-        currentCount +="5";
-    }
-    private void AddDigit6()
-    {
-        currentCount +="6";
-    }
-    private void AddDigit7()
-    {
-        currentCount +="7";
-    }
-    private void AddDigit8()
-    {
-        currentCount +="8";
-    }
-    private void AddDigit9()
-    {
-        currentCount +="9";
-    }
-
-    private void Plus()
-    {
-        operation = "+";
-        buffer = Convert.ToDouble(currentCount);
-        currentCount = "";
-        
-    }
-    private void Minus()
-    {
-        operation = "-";
-        buffer = Convert.ToDouble(currentCount);
-        currentCount = "";
-        
-    }
-    private void Delete()
-    {
-        operation = "/";
-        buffer = Convert.ToDouble(currentCount);
-        currentCount = "";
-         
-    }
-    private void Multiplication()
-    {
-        operation = "*";
-        buffer = Convert.ToDouble(currentCount);
-        currentCount = "";
-        
-    }
-    private void Res() 
-    { switch (operation)
-            {
-                case "+":
-                   currentCount = (buffer + Convert.ToDouble(currentCount)).ToString();
-                                   break;
-                case "-":
-                    currentCount = (buffer - Convert.ToDouble(currentCount)).ToString();
-                                        break;
-                case "*":
-                   currentCount = (buffer * Convert.ToDouble(currentCount)).ToString();
-                    break;
-                case "/":
-                    currentCount = (buffer / Convert.ToDouble(currentCount)).ToString();
-                    break;
-
-            }
-         
-    }
-    }
+     string surName;
+     string name;
+     string secondName;
+     string login;
+   
+}

@@ -3,14 +3,22 @@
 <h1>Counter</h1>
 
 <p>Current count: @currentCount</p>
-
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+<br />
+<br />
+<input @bind-value="currentCount"/>
+<br/>
+<br />
+<ButtonGroup content="list"></ButtonGroup>
+<LoginListGroup loginlist="login"></LoginListGroup>
+
 
 @code {
     private int currentCount = 0;
-
+    List<string> list = new List<string>() { "1", "2", "3" };
+    List<string> login = new List<string> () { "Login_1", "Login_2", "Login_3" };
     private void IncrementCount()
     {
         currentCount++;
     }
-}
+   }

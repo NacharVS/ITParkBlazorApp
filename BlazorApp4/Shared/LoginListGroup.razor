@@ -1,0 +1,10 @@
+﻿@foreach (var item in loginlist)
+{
+    <LoginList Login =@item/>
+}
+
+@code {
+     [Parameter]
+    public List<string> loginlist { get; set; }
+
+}
