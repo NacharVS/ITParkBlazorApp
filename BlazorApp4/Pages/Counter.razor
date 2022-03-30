@@ -5,9 +5,15 @@
 <p>Current count: @currentCount</p>
 
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+<br/>
+<input @bind-value = "currentCount"/>
+<ButtonGroup content="list"></ButtonGroup>
+
 
 @code {
     private int currentCount = 0;
+
+    private List<string> list = new List<string>() { "1", "2", "3", "4", "5"};
 
     private void IncrementCount()
     {

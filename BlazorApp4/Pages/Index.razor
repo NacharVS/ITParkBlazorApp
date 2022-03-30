@@ -3,46 +3,8 @@
 
 <link href="/css/styles.css" rel="stylesheet" type="text/css">
 
-<h1>CALCULATOR</h1>
+<LoginList Logins="@User.GetList()"/>
 
-<br>
-<div>
-    <button class="btn btn-primary" @onclick="Digit_1">1</button>
-    <button class="btn btn-primary" @onclick="Digit_2">2</button>
-    <button class="btn btn-primary" @onclick="Digit_3">3</button>
-    <button class="btn btn-primary" @onclick="Digit_3">Clear</button>
-</div>
-<div>
-    <button class="btn btn-primary" @onclick="Digit_1">4</button>
-    <button class="btn btn-primary" @onclick="Digit_2">5</button>
-    <button class="btn btn-primary" @onclick="Digit_3">6</button>
-    <button class="btn btn-primary" @onclick="Digit_3">=</button>
-</div>
-<div>
-    <button class="btn btn-primary" @onclick="Digit_1">7</button>
-    <button class="btn btn-primary" @onclick="Digit_2">8</button>
-    <button class="btn btn-primary" @onclick="Digit_3">9</button>
-    <button class="btn btn-primary" @onclick="Digit_3">*</button>
-</div>
-<div>
-    <button class="btn btn-primary" @onclick="Digit_1"> - </button>
-    <button class="btn btn-primary" @onclick="Digit_2">0</button>
-    <button class="btn btn-primary" @onclick="Digit_3"> + </button>
-    <button class="btn btn-primary" @onclick="Digit_3">/</button>
-</div>
-
-
-@code {
-    private void Digit_1()
-    {
-        
-    }
-    private void Digit_2()
-    {
-        
-    }
-    private void Digit_3()
-    {
-        
-    }
+@code{
+    
 }
