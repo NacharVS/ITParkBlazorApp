@@ -11,15 +11,19 @@
 <h4>Phone Number</h4>
 <input @bind-value="Phone" />
 <br />
-<button class="btn btn-primary">SignIn</button>
+<button class="btn btn-primary" @onclick="RegistrationD">SignIn</button>
 
 @code {
     private string Login;
     private string Name;
     private string Surname;
     private string Phone;
+   
 
-
+    private void RegistrationD()
+    {
+        User.GetDemoList(Name);
+    }
 
 
 }

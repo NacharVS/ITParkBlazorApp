@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MongoDB.Driver;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -39,13 +40,9 @@ namespace BlazorApp4.Data
             return listToReturn;
         }
 
-        public static List<User> GetDemoList()
+        public static void GetDemoList(string name)
         {
-            List<User> listToReturn = new List<User>();
-            listToReturn.Add(new User("Bob", "987654321"));
-            listToReturn.Add(new User("Ivan", "987654321"));
-            listToReturn.Add(new User("Semen", "987654321"));
-            return listToReturn;
+            var client = new MongoClient();
         }
     }
 }
