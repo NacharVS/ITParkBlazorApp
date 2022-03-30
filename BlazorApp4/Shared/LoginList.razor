@@ -1,4 +1,6 @@
-﻿<div class="table-responsive">
+﻿@using Data
+
+<div class="table-responsive">
 <table class="table table-striped">
     <thead>
         <tr>
@@ -9,17 +11,18 @@
         </tr>
     </thead>
     <tbody>
-<div class="row text-center alert alert-info">
-    <div class="col">
-        <p>qqqqqq</p>
-        <p>qqqqqq</p>
-    </div>
-</div>
+        @foreach (var item in Logins)
+        {
+            <tr>
+                <td>@item</td>
+            </tr>
+        }
+
     </tbody>
 </table>
 </div>
 
 @code {
     [Parameter]
-    public string Login { get; set; }
+    public List<User> Logins { get; set; }
 }
