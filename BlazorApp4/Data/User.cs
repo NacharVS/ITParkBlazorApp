@@ -7,6 +7,12 @@ namespace BlazorApp4.Data
 {
     public class User
     {
+        public User(string login, string phoneNumber)
+        {
+            Login = login;
+            PhoneNumber = phoneNumber;
+        }
+
         public User(string login, string name, string surname, string phoneNumber)
         {
             Login = login;
@@ -30,6 +36,15 @@ namespace BlazorApp4.Data
             listToReturn.Add(new User("Bob", "Petr", "Petrov", "987654321"));
             listToReturn.Add(new User("Bob", "Andrey", "Andreev", "987654321"));
             listToReturn.Add(new User("Bob", "Georgiy", "Fedorov", "987654321"));
+            return listToReturn;
+        }
+
+        public static List<User> GetDemoList()
+        {
+            List<User> listToReturn = new List<User>();
+            listToReturn.Add(new User("Bob", "987654321"));
+            listToReturn.Add(new User("Ivan", "987654321"));
+            listToReturn.Add(new User("Semen", "987654321"));
             return listToReturn;
         }
     }
