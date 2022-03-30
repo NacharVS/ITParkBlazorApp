@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MongoDB.Driver;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -46,6 +47,14 @@ namespace BlazorApp4.Data
             listToReturn.Add(new User("Ivan", "987654321"));
             listToReturn.Add(new User("Semen", "987654321"));
             return listToReturn;
+        }
+
+        public static void AddUser(User name) //Добавление в БД
+        {
+            var client = new MongoClient("mongodb://localhost");
+            var database = client.GetDatabase("Regist");
+            var collection = database.GetCollection<User>("Login");
+            collection.InsertOne(name);
         }
     }
 }

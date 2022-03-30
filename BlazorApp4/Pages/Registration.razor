@@ -1,5 +1,6 @@
 ﻿@page "/regist"
 
+
 <h3>Registration</h3>
 
 <h4>Login</h4>
@@ -11,7 +12,7 @@
 <h4>Phone Number</h4>
 <input @bind-value="Phone" />
 <br />
-<button class="btn btn-primary">SignIn</button>
+<button class="btn btn-primary"@onclick="Add">SignIn</button>
 
 @code {
     private string Login;
@@ -19,7 +20,11 @@
     private string Surname;
     private string Phone;
 
-
+    public static void Add() 
+        {
+            //new User(Login, Name, Surname, Phone);
+            User.AddUser(Name);
+        }
 
 
 }
