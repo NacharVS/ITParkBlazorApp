@@ -5,8 +5,8 @@
 Welcome to your new app.
 
 <SurveyPrompt Title="How is Blazor working for you?" />
-<LoginList Logins="logs"/>
+<LoginList Logins="@User.GetList()"/>
 
 @code{
-    private List<string> logs = new List<string>() { "Bob", "John", "Fill", "Ivan", "Rob" };
+   
 }
