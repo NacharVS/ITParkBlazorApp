@@ -1,67 +1,75 @@
 ﻿<div class="table-responsive">
-    <table class="table table-striped">
-        <thead>
-            @if (Logins == null)
-            {
-                <tbody>
-                    <tr>
-                        <th>Loading....</th>
-                    </tr>
-                </tbody>
-            }
-            else
-            {
-                @if (IsDemo)
-                {
-                    <tr>
-                        <th>Login</th>
-                        <th>PhoneNumber</th>
-                    </tr>
-                    <tbody>
-                    @foreach (var item in Logins)
-                    {
-                        <tr>
-                            <td>@item.Login</td>
-                            <td>@item.PhoneNumber</td>
-                        </tr>
-                    }
-                    </tbody>
-                }
-                else
-                {
-                    <tbody>
-                        <tr>
-                            <th>Login</th>
-                            <th>Surname</th>
-                            <th>Name</th>
-                            <th>PhoneNumber</th>
-                            <th>Action</th>
-                        </tr>
-                    @foreach (var item in Logins)
-        {
-    <tr>
-        <td>@item.Login</td>
-        <td>@item.Name</td>
-        <td>item.SurName</td>
-        <td>@item.PhoneNumber</td>
-        <td><button class="btn btn-primary">ShowSingle</button></td>
-    </tr>
-        }
-    </tbody>
-                
+	<table class="table table-striped">
+		<thead>
+			@if (Logins == null)
+			{
+				<tr>
+					<th>Loading....</th>
+				</tr>
+			<tbody>
+			</tbody>
+			}
+			else
+			{
+				@if (IsDemo)
+				{
+				<tr>
+					<th>Login</th>
+					<th>PhoneNumber</th>
+				</tr>
+				<tbody>
+				@foreach (var item in Logins)
+				{
+				<tr>
+					<td>@item.Login</td>
+					<td>@item.PhoneNumber</td>
+				</tr>
+				}
+				</tbody>
+				}
+				else
+				{
+				<tbody>
+					<tr>
+						<th>Login</th>
+						<th>Surname</th>
+						<th>Name</th>
+						<th>PhoneNumber</th>
+						<th>Action</th>
+					</tr>
 
-            }
-        }
+				@foreach (var item in Logins)
+				{
+				<tr>
+					<td>@item.Login</td>
+					<td>@item.Name</td>
+					<td>item.SurName</td>
+					<td>@item.PhoneNumber</td>
+					<td><button name="Hello" class="btn btn-primary">ShowSingle</button></td>
+				</tr>
+				}
+				</tbody>
+				}
+			}
+			</thead>
+		</table>
+	</div>
 
-            </thead>
-
-        </table>
+<div class="alert alert-secondary mt-4" role="alert">
+	<h5>Login: @Login</h5>
+	<h5>Name: @Name</h5>
+	<h5>Surname: @Surname</h5>
+	<h5>Phone: @Phone</h5>
 </div>
 
-    @code {
-        [Parameter]
-        public List<User> Logins { get; set; }
-       
-        [Parameter]
-        public bool IsDemo { get; set; }      
-    }
+@code {
+	[Parameter]
+	public List<User> Logins { get; set; }
+	[Parameter]
+	public bool IsDemo { get; set; }
+
+	private string Login;
+	private string Name;
+	private string Surname;
+	private string Phone;
+        }

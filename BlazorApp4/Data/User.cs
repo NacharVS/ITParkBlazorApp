@@ -28,7 +28,6 @@ namespace BlazorApp4.Data
         public string SurName { get; set; }
         public string PhoneNumber { get; set; }
 
-
         public static List<User> GetList()
         {
             List<User> listToReturn = new List<User>();
