@@ -1,10 +1,60 @@
-﻿<div class="alert alert-secondary mt-4" role="alert" >@Login
-   
-</div>
+﻿<div class="table-responsive">
+    <table class= "table table-striped">
+ <thead>
+            @if (IsDemo)
+            {
+                <tr>
+                    <th>PhoneNumber</th>
+                    <th>Login</th>
+                </tr>
+            <tbody>
+                @foreach (var item in Logins)
+                {
+                    <tr>
+                        <td>@item.PhoneNamber</td>
+                        <td>@item.Login</td>
+                    </tr>
+                }
+            </tbody>
+        }
+        else
+        {
+            <tr>
+           <th>Surname</th>
+           <th>Name</th>
+           <th>PhoneNamber</th>
+           <th>Login</th>
+            </tr>
+            <tbody>
+                @foreach (var item in Logins)
+                {
+                <tr>
+                    @if (item.Surname == null)
+                    {
+                        <td>No Data</td>
+                    }
+                    else
+                    {
+                        <td>@item.Surname</td>
+                    }
 
+                    <td>No Data</td>
+                    <td>@item.PhoneNamber</td>
+                    <td>@item.Login</td>
+                </tr>
+                }
+            </tbody>
+        }
+       </thead>
+      </table>
+    </div>
+
+      
 @code {
     [Parameter]
-    public string Login { get; set; }
+    public List<User> Logins { get; set; }
+    [Parameter]
+    public bool IsDemo { get; set; }
    
 }
 

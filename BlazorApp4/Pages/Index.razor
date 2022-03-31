@@ -1,27 +1,6 @@
 ﻿@page "/"
-@using BlazorApp4.Data
-@using MongoDB.Driver
-<h3>Registration</h3>
 
-<input type="text" name="surname" placeholder="Surname" required @bind-value="surName"/>
-<br />
-<br />
-<input type="text" name="name" placeholder="Name" required @bind-value="name"/>
-<br />
-<br />
-<input type="text" name="secondName" placeholder="Second name" required @bind-value="secondName"/>
-<br />
-<br />
-<input type="text" name="login" placeholder="Login" required @bind-value="login"/>
-<br />
-<br />
-<Button ButtonContent="Registrated" @*@onclick="MongoDB.AddToDataBase(new User(surName,name,secondName,login))"*@/>
-<br />
-
+<LoginList Logins="@User.GetList()" IsDemo="true" />
 @code{
-     string surName;
-     string name;
-     string secondName;
-     string login;
-   
 }
+
