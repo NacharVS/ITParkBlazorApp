@@ -1,25 +1,23 @@
-﻿
-
-<div class="table-responsive">
+﻿<div class="table-responsive">
     <table class="table table-striped">
         <thead>
             @if (Logins == null)
             {
-                <tr>
-                    <th>Loading....</th>
-                </tr>
-            <tbody>
-            </tbody>
-        }
-        else
-        {
-            @if (IsDemo)
-            {
-                <tr>
-                    <th>Login</th>
-                    <th>PhoneNumber</th>
-                </tr>
                 <tbody>
+                    <tr>
+                        <th>Loading....</th>
+                    </tr>
+                </tbody>
+            }
+            else
+            {
+                @if (IsDemo)
+                {
+                    <tr>
+                        <th>Login</th>
+                        <th>PhoneNumber</th>
+                    </tr>
+                    <tbody>
                     @foreach (var item in Logins)
                     {
                         <tr>
@@ -27,20 +25,19 @@
                             <td>@item.PhoneNumber</td>
                         </tr>
                     }
-                </tbody>
-            }
-            else
-            {
-    <tbody>
-        <tr>
-            <th>Login</th>
-            <th>Surname</th>
-            <th>Name</th>
-            <th>PhoneNumber</th>
-            <th>Action</th>
-        </tr>
-
-        @foreach (var item in Logins)
+                    </tbody>
+                }
+                else
+                {
+                    <tbody>
+                        <tr>
+                            <th>Login</th>
+                            <th>Surname</th>
+                            <th>Name</th>
+                            <th>PhoneNumber</th>
+                            <th>Action</th>
+                        </tr>
+                    @foreach (var item in Logins)
         {
     <tr>
         <td>@item.Login</td>
@@ -59,13 +56,12 @@
             </thead>
 
         </table>
-    </div>
+</div>
 
     @code {
         [Parameter]
         public List<User> Logins { get; set; }
+       
         [Parameter]
-        public bool IsDemo { get; set; }
-
-      
-}
+        public bool IsDemo { get; set; }      
+    }
