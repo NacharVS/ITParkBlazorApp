@@ -1,21 +1,28 @@
-﻿using System.Collections.Generic;
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Driver;
+using System.Collections.Generic;
 
 namespace BlazorApp4
 {
     public class User
     {
-        public User(string v1, string v2, string v3, string v4)
+        [BsonId]
+        [BsonIgnoreIfDefault]
+        ObjectId _id;
+
+        public User(string login, string surname, string name, string phoneNumber)
         {
-            Login = v1;
-            Surname = v2;
-            Name = v3;
-            PhoneNumber = v4;
+            Login = login;
+            Surname = surname;
+            Name = name;
+            PhoneNumber = phoneNumber;
         }
 
-        public User(string v1, string v4)
+        public User(string login, string phoneNumber)
         {
-            Login = v1;
-            PhoneNumber = v4;
+            Login = login;
+            PhoneNumber = phoneNumber;
         }
 
         public string Login { get; set; }
@@ -33,5 +40,32 @@ namespace BlazorApp4
             listToReturn.Add(new User("Sam", "01382"));
             return listToReturn;
         }
+        public static User GetUser(string login)
+        {
+            //var client = new MongoClient();
+            var client = new MongoClient("mongodb://localhost");
+            var database = client.GetDatabase("BlasorApp");
+            var collection = database.GetCollection<User>("Users");
+            return collection.Find(x => x.Login == login).FirstOrDefault();
+        }
+        public static List<User> GetDemoList()
+        {
+            //var client = new MongoClient();
+            var client = new MongoClient("mongodb://localhost");
+            var database = client.GetDatabase("BlasorApp");
+            var collection = database.GetCollection<User>("Users");
+            var list = collection.Find(x => true).ToList();
+            return list;
+        }
+        public static void AddUserToDB(User user)
+        {
+            //var client = new MongoClient();
+            var client = new MongoClient("mongodb://localhost");
+            var database = client.GetDatabase("BlasorApp");
+            var collection = database.GetCollection<User>("Users");
+            var list = collection.Find(x => true).ToList();
+            collection.InsertOne(user);
+        }
+
     }
 }

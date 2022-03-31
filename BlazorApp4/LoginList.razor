@@ -1,31 +1,66 @@
 ﻿<div class="table-responsive">
 <table class="table table-striped">
     <thead>
-        <tr>
-            <th>Login</th>
-            <th>Surname</th>
-            <th>Name</th>
-            <th>PhoneNumber</th>
-        </tr>
-    </thead>
-    <tbody>  
-        
-    @foreach (var item in Logins)
+        @if (IsDemo)
             {
                 <tr>
+                    <th>Login</th>
+                    <th>PhoneNumber</th>
+                </tr>
+            <tbody>
+                @foreach (var item in Logins)
+                {
+                    <tr>
+                        <td>@item.Login</td>
+                        <td>@item.PhoneNumber</td>
+                    </tr>
+                }
+            </tbody>
+            }
+        else
+        {
+            <tr>
+                <th>Login</th>
+                <th>Surname</th>
+                <th>Name</th>
+                <th>PhoneNumber</th>
+            </tr>
+            <tbody>
+                @foreach (var item in Logins)
+                {
+                <tr>
                     <td>@item.Login</td>
-                    <td>@item.Surname</td>
-                    <td>@item.Name</td>
+                    @if (item.Surname == null)
+                    {
+                        <td>No Data</td>
+                    }
+                    else
+                    {
+                        <td>@item.Surname</td>
+                    }
+
+                    @if (item.Name == null)
+                    {
+                        <td>No Data</td>
+                    }
+                    else
+                    {
+                        <td>@item.Name</td>
+                    }
                     <td>@item.PhoneNumber</td>
                 </tr>
-            }
-
-        </tbody>
+                }
+            </tbody>
+        }
+    </thead>
+        
     </table>
 </div>
 
 @code {
     [Parameter]
     public List<User> Logins { get; set; }
+    [Parameter]
+    public bool IsDemo { get; set; }
 }
 
