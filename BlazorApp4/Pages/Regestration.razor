@@ -1,0 +1,36 @@
+﻿@page "/regist"
+@using BlazorApp4.Data
+
+<h3>Registration</h3>
+
+<h4>Login</h4>
+<input @bind-value="Login" />
+<h4>Surname</h4>
+<input @bind-value="Surname" />
+<h4>Name</h4>
+<input @bind-value="Name" />
+<h4>Phone Number</h4>
+<input @bind-value="Phone" />
+<br />
+<button class="btn btn-primary" @onclick="Reg">SignIn</button>
+
+@code {
+    private string Login;
+    private string Surname;
+    private string Name;
+    private string Phone;
+
+
+    private void ClearInputs()
+    {
+        Login = "";
+        Surname = "";
+        Name = "";
+        Phone = "";
+        StateHasChanged();
+    }
+    private void Reg()
+    {
+        User.AddUser(Login, Surname, Name, Phone);
+    }
+}
