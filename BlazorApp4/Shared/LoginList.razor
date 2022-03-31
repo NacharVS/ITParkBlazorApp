@@ -7,33 +7,16 @@
             {
                 <tr>
                     <th>Loading....</th>
-
                 </tr>
-            }
-            else
-            {
-                @if (IsDemo)
-                {
-                    <tr>
-                        <th>Login</th>
-                        <th>PhoneNumber</th>
-                    </tr>
-                <tbody>
-                    @foreach (var item in Logins)
-                    {
-                        <tr>
-                            <td>@item.Login</td>
-                            <td>@item.PhoneNumber</td>
-                        </tr>
-                    }
-                </tbody>
-            }
-            else
+            <tbody>
+            </tbody>
+        }
+        else
+        {
+            @if (IsDemo)
             {
                 <tr>
                     <th>Login</th>
-                    <th>Surname</th>
-                    <th>Name</th>
                     <th>PhoneNumber</th>
                 </tr>
                 <tbody>
@@ -41,22 +24,37 @@
                     {
                         <tr>
                             <td>@item.Login</td>
-                            @if (item.Surname == null)
-                            {
-                                <td>No Data</td>
-                            }
-                            else
-                            {
-                                <td>@item.Surname</td>
-                            }
-
-                            <td>No Data</td>
                             <td>@item.PhoneNumber</td>
                         </tr>
                     }
                 </tbody>
             }
+            else
+            {
+    <tbody>
+        <tr>
+            <th>Login</th>
+            <th>Surname</th>
+            <th>Name</th>
+            <th>PhoneNumber</th>
+            <th>Action</th>
+        </tr>
+
+        @foreach (var item in Logins)
+        {
+    <tr>
+        <td>@item.Login</td>
+        <td>@item.Name</td>
+        <td>item.SurName</td>
+        <td>@item.PhoneNumber</td>
+        <td><button class="btn btn-primary">ShowSingle</button></td>
+    </tr>
+        }
+    </tbody>
+                
+
             }
+        }
 
             </thead>
 

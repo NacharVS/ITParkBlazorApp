@@ -1,4 +1,5 @@
-﻿using MongoDB.Driver;
+﻿using MongoDB.Bson;
+using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,13 +19,13 @@ namespace BlazorApp4.Data
         {
             Login = login;
             Name = name;
-            Surname = surname;
+            SurName = surname;
             PhoneNumber = phoneNumber;
         }
-
+        public ObjectId _id { get; set; }
         public string Login { get; set; }
         public string Name { get; set; }
-        public string Surname { get; set; }
+        public string SurName { get; set; }
         public string PhoneNumber { get; set; }
 
 
@@ -40,9 +41,12 @@ namespace BlazorApp4.Data
             return listToReturn;
         }
 
-        public static void GetDemoList(string name)
+        public static List<User> GetListFromDb()
         {
-            var client = new MongoClient();
+            var client = new MongoClient("mongodb://localhost");
+            var database = client.GetDatabase("Blazor");
+            var collection = database.GetCollection<User>("Users");
+            return collection.Find(x => true).ToList();
         }
     }
 }
