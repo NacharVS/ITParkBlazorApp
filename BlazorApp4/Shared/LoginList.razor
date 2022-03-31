@@ -61,11 +61,22 @@
         </table>
     </div>
 
+<div class="alert alert-secondary mt-4" role="alert">
+    <h5>Login: @Login</h5>
+    <h5>Name: @Name</h5>
+    <h5>Surname: @Surname</h5>
+    <h5>Phone: @Phone</h5>
+</div>
+
     @code {
         [Parameter]
         public List<User> Logins { get; set; }
         [Parameter]
         public bool IsDemo { get; set; }
 
-      
-}
+        private string Login;
+        private string Name;
+        private string Surname;
+        private string Phone;
+
+        }
