@@ -1,12 +1,14 @@
 ﻿<div class="table-responsive">
 <table class="table table-striped">
-    <thead>
+    @*<thead>*@
         @if (IsDemo)
             {
+                <thead>
                 <tr>
                     <th>Login</th>
                     <th>PhoneNumber</th>
                 </tr>
+                </thead>
             <tbody>
                 @foreach (var item in Logins)
                 {
@@ -19,12 +21,14 @@
             }
         else
         {
+            <thead>
             <tr>
                 <th>Login</th>
                 <th>Surname</th>
                 <th>Name</th>
                 <th>PhoneNumber</th>
             </tr>
+            </thead>
             <tbody>
                 @foreach (var item in Logins)
                 {
@@ -52,7 +56,7 @@
                 }
             </tbody>
         }
-    </thead>
+    @*</thead>*@
         
     </table>
 </div>
