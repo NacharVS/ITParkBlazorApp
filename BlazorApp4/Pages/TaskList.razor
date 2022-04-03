@@ -3,7 +3,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col">
-            <h2 class="text-center">TaskList</h2>
+            <h2 class="text-center">TaskList. Count of tasks:@_tasks.Count(x => !x.IsDone)</h2>
             <table class="table table-striped">
                 <thead class="table-dark">
                     <tr>
@@ -18,9 +18,9 @@
                     <tbody>
                         <tr>
                             <td>@item.Name</td>
+                            <td><input type="checkbox" @bind-value="item.InProgress" /></td>
                             <td><input type="checkbox" @bind-value="item.IsDone" /></td>
-                            <td><input type="checkbox" @bind-value="item.IsDone" /></td>
-                            <td>@item.IsDone</td>
+                            <td><button class="btn btn-danger" @onclick="(() => DeleteTask(item))">Delete Task</button></td>
                         </tr>
                     </tbody>
                 }
@@ -28,11 +28,14 @@
 
             <div class="row">
                 <div class="col">
-                    <input class="form-control" placeholder="Input new task here" @bind-value="_newTask"/>
+                    <input class="form-control" placeholder="Input new task here" @bind-value="_newTask" />
                 </div>
-                <div class="col">
+                <div class="col col-auto">
                     <button class="btn btn-outline-dark" @onclick="AddNewTaskToList">Add New Task</button>
-                </div>   
+                </div>
+                <div class="col col-auto">
+                    <button class="btn btn-primary" @onclick="AddToDB">Save Task List</button>
+                </div>
             </div>
         </div>
     </div>
@@ -44,11 +47,21 @@
     private string _newTask;
 
     private void AddNewTaskToList()
+    {
+        if (!string.IsNullOrEmpty(_newTask))
         {
-            if (!string.IsNullOrEmpty(_newTask))
-            {
             _tasks.Add(new TaskItem(_newTask));
             _newTask = ""; // string.Empty;
-            }
         }
+    }
+
+    private void DeleteTask(TaskItem item)
+    {
+        _tasks.Remove(item);
+    }
+
+    private void AddToDB()
+    {
+        TaskListDB.AddItem(new TaskListDB(_tasks), "Monday");
+    }
 }

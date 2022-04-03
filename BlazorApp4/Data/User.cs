@@ -46,6 +46,7 @@ namespace BlazorApp4.Data
             var client = new MongoClient("mongodb://localhost");
             var database = client.GetDatabase("Blazor");
             var collection = database.GetCollection<User>("Users");
+            
             return collection.Find(x => true).ToList();
         }
     }
