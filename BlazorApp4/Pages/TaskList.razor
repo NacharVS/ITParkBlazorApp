@@ -1,0 +1,54 @@
+﻿@page "/tasklist"
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <h2 class="text-center">TaskList</h2>
+            <table class="table table-striped">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Mission</th>
+                        <th>In Progress</th>
+                        <th>Is Done</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                @foreach (var item in _tasks)
+                {
+                    <tbody>
+                        <tr>
+                            <td>@item.Name</td>
+                            <td><input type="checkbox" @bind-value="item.IsDone" /></td>
+                            <td><input type="checkbox" @bind-value="item.IsDone" /></td>
+                            <td>@item.IsDone</td>
+                        </tr>
+                    </tbody>
+                }
+            </table>
+
+            <div class="row">
+                <div class="col">
+                    <input class="form-control" placeholder="Input new task here" @bind-value="_newTask"/>
+                </div>
+                <div class="col">
+                    <button class="btn btn-outline-dark" @onclick="AddNewTaskToList">Add New Task</button>
+                </div>   
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    private List<TaskItem> _tasks = new List<TaskItem>();
+
+    private string _newTask;
+
+    private void AddNewTaskToList()
+        {
+            if (!string.IsNullOrEmpty(_newTask))
+            {
+            _tasks.Add(new TaskItem(_newTask));
+            _newTask = ""; // string.Empty;
+            }
+        }
+}
