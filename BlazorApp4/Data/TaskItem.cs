@@ -8,8 +8,7 @@ namespace BlazorApp4.Data
     public class TaskItem
     {
         private bool _isDone;
-        private bool _isProgress;
-
+        private bool _inProgress;
         public TaskItem(string name)
         {
             Name = name;
@@ -22,17 +21,14 @@ namespace BlazorApp4.Data
             set
             {
                 _isDone = value;
-                _isProgress = false;
             }
         }
-
-        public bool IsProgress
+        public bool InProgress
         {
-            get => _isProgress;
+            get => _inProgress;
             set
             {
-                _isProgress = value;
-                _isDone = false;
+                _inProgress = value;
             }
         }
     }
