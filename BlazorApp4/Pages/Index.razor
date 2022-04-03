@@ -4,12 +4,12 @@
 
 Welcome to your new app.
 
-<LoginList Logins="@User.GetListFromDb()" IsDemo="false"/>
-<LoginList2 Logins2="@User.GetLoginFromDb()"/>
+<LoginList Logins="@User.GetListFromDb()" IsDemo="false" /> @*это наш старый, настроеный компонент, который есть в папке shared*@
+@*<LoginList2 Logins2="@User.GetLoginFromDb()"/> - этого компонента нет в папке, его не существует*@
 
 <ul class="nav flex-column">
     <li class="nav-item px-3">
-        @User.GetLoginFromDb().ElementAt(0);
+        @*@User.GetLoginFromDb().ElementAt(0);*@
     </li>
     @foreach (var item in Logins2)
     {
@@ -29,8 +29,8 @@ Welcome to your new app.
 </ul>
 
 @code{
-    [Parameter]
-    public List<User> Logins { get; set; }
-    [Parameter]
-    public List<string> Logins2 { get; set; }
+    //[Parameter]
+    //public List<User> Logins { get; set; }
+
+    public List<string> Logins2 = User.GetLoginFromDb();
 }
