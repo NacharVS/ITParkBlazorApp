@@ -13,23 +13,12 @@
 <ButtonGroup content="list"></ButtonGroup>
 
 <ul class="nav flex-column">
+    @foreach (var forecast in Logins)
+    {
     <li class="nav-item px-3">
-        1111
+       @item.Login
     </li>
-    <li class="nav-item px-3">
-        22222
-    </li>
-    <li class="nav-item px-3">
-        3333
-
-
-    </li>
-    <li class="nav-item px-3">
-        4444
-    </li>
-    <li class="nav-item px-3">
-        5555
-    </li>
+    }
 </ul>
 
 
@@ -43,4 +32,9 @@
     {
         currentCount++;
     }
+    
+    [Parameter]
+        public List<User> Logins { get; set; }
+
+        
 }

@@ -1,5 +1,4 @@
-﻿using MongoDB.Bson;
-using MongoDB.Driver;
+﻿using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,13 +18,13 @@ namespace BlazorApp4.Data
         {
             Login = login;
             Name = name;
-            SurName = surname;
+            Surname = surname;
             PhoneNumber = phoneNumber;
         }
-        public ObjectId _id { get; set; }
+
         public string Login { get; set; }
         public string Name { get; set; }
-        public string SurName { get; set; }
+        public string Surname { get; set; }
         public string PhoneNumber { get; set; }
 
 
@@ -41,12 +40,29 @@ namespace BlazorApp4.Data
             return listToReturn;
         }
 
-        public static List<User> GetListFromDb()
+        public static List<User> GetDemoList()
+        {
+            List<User> listToReturn = new List<User>();
+            listToReturn.Add(new User("Bob", "987654321"));
+            listToReturn.Add(new User("Ivan", "987654321"));
+            listToReturn.Add(new User("Semen", "987654321"));
+            return listToReturn;
+        }
+
+        
+
+        public static List<string> GetListDB()  
         {
             var client = new MongoClient("mongodb://localhost");
-            var database = client.GetDatabase("Blazor");
-            var collection = database.GetCollection<User>("Users");
-            return collection.Find(x => true).ToList();
+            var database = client.GetDatabase("Registration");
+            var collection = database.GetCollection<User>("Login");
+            var listUsersFromDB = collection.Find(x => true).ToList();
+            List<string> listToReturn = new List<string>();
+            foreach (var item in listUsersFromDB)
+            {
+                listToReturn.Add(item.Login);
+            }
+            return listToReturn;
         }
     }
 }
