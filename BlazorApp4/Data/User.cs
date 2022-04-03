@@ -40,12 +40,35 @@ namespace BlazorApp4.Data
             return listToReturn;
         }
 
+        public static void AddUserToDB(string login, string name, string surname, string phone) //Добавление юзера в БД
+        {
+            var client = new MongoClient("mongodb://localhost");
+            var database = client.GetDatabase("Blazor");
+            var collection = database.GetCollection<User>("Users");
+            collection.InsertOne(new User(login, name, surname, phone));
+        }
+
         public static List<User> GetListFromDb()
         {
             var client = new MongoClient("mongodb://localhost");
             var database = client.GetDatabase("Blazor");
             var collection = database.GetCollection<User>("Users");
-            return collection.Find(x => true).ToList();
+            var listUsersFromDB = collection.Find(x => true).ToList();
+            return listUsersFromDB;
+        }
+        public static List<String> GetLoginFromDb()
+        {
+
+            var client = new MongoClient("mongodb://localhost");
+            var database = client.GetDatabase("Blazor");
+            var collection = database.GetCollection<User>("Users");
+            var listUsersFromDB = collection.Find(x => true).ToList();
+            var listToReturn = new List<string>();
+            foreach (var item in listUsersFromDB)
+            {
+                listToReturn.Add(item.Login);
+            }
+            return listToReturn;
         }
     }
 }

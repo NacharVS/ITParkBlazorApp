@@ -20,7 +20,9 @@
 
 <br />
 
-<button class="btn btn-primary" @onclick="RegistrationD">SignIn</button>
+<button class="btn btn-primary" @onclick="UserRegistration">SignIn</button>
+
+<button class="btn btn-primary" @onclick="FieldsClear">Clear</button>
 
 @code {
     private string Login;
@@ -28,9 +30,16 @@
     private string Surname;
     private string Phone;
     private string qq = "sdadasdads";
-   
-    private void RegistrationD()
+
+    private void FieldsClear()
     {
         Login = "";
+        Name = "";
+        Surname = "";
+        Phone = "";
+    }
+    private void UserRegistration()
+    {
+        User.AddUserToDB(Login,Name,Surname,Phone);
     }
 }

@@ -4,25 +4,33 @@
 
 Welcome to your new app.
 
-<LoginList Logins="@User.GetList()" IsDemo="false"/>
+<LoginList Logins="@User.GetListFromDb()" IsDemo="false"/>
+<LoginList2 Logins2="@User.GetLoginFromDb()"/>
+
 <ul class="nav flex-column">
+    <li class="nav-item px-3">
+        @User.GetLoginFromDb().ElementAt(0);
+    </li>
+    @foreach (var item in Logins2)
+    {
         <li class="nav-item px-3">
-            @foreach (var item in Logins)
-				{
-				@item.Login
-				}
+            @item;
         </li>
-        <li class="nav-item px-3">
-            @User.GetListFromDb();
-        </li>
-        <li class="nav-item px-3">
-            @User.GetListFromDb();
-        </li>
-        <li class="nav-item px-3">
-            @User.GetListFromDb();
-        </li>
-    </ul>
+    }
+    <li class="nav-item px-3">
+        3333
+    </li>
+    <li class="nav-item px-3">
+        4444
+    </li>
+    <li class="nav-item px-3">
+        5555
+    </li>
+</ul>
+
 @code{
-   [Parameter]
-	public List<User> Logins { get; set; }
+    [Parameter]
+    public List<User> Logins { get; set; }
+    [Parameter]
+    public List<string> Logins2 { get; set; }
 }
