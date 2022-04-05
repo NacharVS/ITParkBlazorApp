@@ -26,5 +26,32 @@ namespace BlazorApp4.Data
             var collection = database.GetCollection<TaskListDB>(day);
             collection.InsertOne(item);
         }
+        //public static List<string> GetTaskList(TaskItem items, string day)
+        //public static List<string> GetTaskList()
+        //{
+        //    var client = new MongoClient("mongodb://localhost");
+        //    var database = client.GetDatabase("TaskList");
+        //    var collection = database.GetCollection<TaskItem>("Monday");
+        //    var TaskListFromDB = collection.Find(x => true).ToList();
+        //    List<string> listToReturn = new List<string>();
+        //    foreach (var item in TaskListFromDB)
+        //    {
+        //        listToReturn.Add(item.Name);
+        //    }
+        //    return listToReturn;
+        //}
+        public static List<string> GetTaskList()
+        {
+            var client = new MongoClient("mongodb://localhost");
+            var database = client.GetDatabase("TaskList");
+            var collection = database.GetCollection<TaskItem>("Monday");
+            var TaskListFromDB = collection.Find(x => true).ToList();
+            List<string> listToReturn = new List<string>();
+            foreach (var item in TaskListFromDB)
+            {
+                listToReturn.Add(item.Name);
+            }
+            return listToReturn;
+        }
     }
 }

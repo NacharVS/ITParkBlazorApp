@@ -43,6 +43,7 @@
 
 @code {
     private List<TaskItem> _tasks = new List<TaskItem>();
+    private List<TaskItem> _tasksFromDB = TaskListDB.GetTaskList();
 
     private string _newTask;
 
