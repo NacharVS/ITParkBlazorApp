@@ -2,6 +2,20 @@
 
 <div class="container-fluid">
     <div class="row">
+       <div class="col col-auto">
+           <table class="table table-striped">
+               <thead class="table table-danger">
+                   <tr>
+                       <th><input class="form-control" placeholder="Input day" @bind-value="_day" /></th>
+                       <th><button class="btn btn-dark" >Show</button></th>
+                       <th><button class="btn btn-dark">Clear</button></th>
+                   </tr>
+               </thead>
+           </table>
+       </div>
+    </div>
+    <div class="row">
+
         <div class="col">
             <h2 class="text-center">TaskList. Count of tasks:@_tasks.Count(x => !x.IsDone)</h2>
             <table class="table table-striped">
