@@ -19,7 +19,7 @@ namespace BlazorApp4.Data
         [BsonElement("ListOfTasks")]
         public List<TaskItem> taskList { get; set; }
 
-        public static void AddItem(TaskListDB item,string day)
+        public static void AddItem(TaskListDB item, string day)
         {
             var client = new MongoClient("mongodb://localhost");
             var database = client.GetDatabase("TaskList");
@@ -28,8 +28,9 @@ namespace BlazorApp4.Data
         }
         public static List<TaskItem> GetItem()
         {
-            var client = new MongoClient("mongodb://localhost");
+            var client = new MongoClient("mongodb://localhost");        
             var database = client.GetDatabase("TaskList");
+            //var a = database.ListCollectionNames().ToList(); для получения всех имен коллекций в бд
             var collection = database.GetCollection<TaskListDB>("Monday");
             List<TaskItem> list = new List<TaskItem>();
             list.AddRange(collection.Find(x => true).FirstOrDefault().taskList);
