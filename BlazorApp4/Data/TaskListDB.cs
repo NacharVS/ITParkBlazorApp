@@ -14,7 +14,7 @@ namespace BlazorApp4.Data
         {
             this.taskList = taskList;
         }
-
+        [BsonIgnoreIfDefault]
         public ObjectId _id { get; set; }
         [BsonElement("ListOfTasks")]
         public List<TaskItem> taskList { get; set; }
@@ -24,31 +24,24 @@ namespace BlazorApp4.Data
             var client = new MongoClient("mongodb://localhost");
             var database = client.GetDatabase("TaskList");
             var collection = database.GetCollection<TaskListDB>(day);
+            if (database.ListCollectionNames().ToList().Exists(x => x == day))
+            {
+                collection.ReplaceOne(x=>true, item);
+            }
+            else
             collection.InsertOne(item);
         }
-        //public static List<string> GetTaskList(TaskItem items, string day)
-        //public static List<string> GetTaskList()
-        //{
-        //    var client = new MongoClient("mongodb://localhost");
-        //    var database = client.GetDatabase("TaskList");
-        //    var collection = database.GetCollection<TaskItem>("Monday");
-        //    var TaskListFromDB = collection.Find(x => true).ToList();
-        //    List<string> listToReturn = new List<string>();
-        //    foreach (var item in TaskListFromDB)
-        //    {
-        //        listToReturn.Add(item.Name);
-        //    }
-        //    return listToReturn;
-        //}
-        public static List<TaskItem> GetTaskList()
+
+        public static List<TaskItem> GetTaskList(string day)
         {
             var client = new MongoClient("mongodb://localhost");
             var database = client.GetDatabase("TaskList");
-            var collection = database.GetCollection<TaskListDB>("Monday");
+            var collection = database.GetCollection<TaskListDB>(day);
             var TaskListFromDB = collection.Find(x => true).ToList();
             List<TaskItem> listToReturn = new List<TaskItem>();
             listToReturn.AddRange(collection.Find(x => true).FirstOrDefault().taskList);
             return listToReturn;
         }
+
     }
 }
