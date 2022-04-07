@@ -1,5 +1,7 @@
-﻿<h3>UserPage</h3>
+﻿@*@page "/userPage"*@
+<h3>UserPage</h3>
 
 @code {
-
+	[Parameter]
+    public User user { get; set; }
 }

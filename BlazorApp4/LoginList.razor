@@ -1,12 +1,13 @@
 ﻿<div class="table-responsive">
 <table class="table table-striped">
-    @*<thead>*@
+    
         @if (IsDemo)
             {
                 <thead>
                 <tr>
                     <th>Login</th>
                     <th>PhoneNumber</th>
+                    <th>Action</th>
                 </tr>
                 </thead>
             <tbody>
@@ -15,6 +16,7 @@
                     <tr>
                         <td>@item.Login</td>
                         <td>@item.PhoneNumber</td>
+                        <td><button class="btn btn-primary" >ShowSingle</button></td>
                     </tr>
                 }
             </tbody>
@@ -27,13 +29,16 @@
                 <th>Surname</th>
                 <th>Name</th>
                 <th>PhoneNumber</th>
+                <th>Action</th>
             </tr>
             </thead>
             <tbody>
                 @foreach (var item in Logins)
                 {
-                <tr>
+                    //@userLogin = item.Login;
+                    <tr>
                     <td>@item.Login</td>
+                    @*@userLogin = @item.Login;*@
                     @if (item.Surname == null)
                     {
                         <td>No Data</td>
@@ -52,11 +57,13 @@
                         <td>@item.Name</td>
                     }
                     <td>@item.PhoneNumber</td>
+                    <td><button class="btn btn-primary" @onclick="ActionM" >ShowSingle</button></td> 
+                    <td><a href="userPage">show User</a></td>
                 </tr>
                 }
             </tbody>
         }
-    @*</thead>*@
+    
         
     </table>
 </div>
@@ -66,5 +73,18 @@
     public List<User> Logins { get; set; }
     [Parameter]
     public bool IsDemo { get; set; }
-}
+    private string Login;
+    private string Name;
+    private string Surname;
+    private string Phone;
 
+    public string userLogin;
+    private void ActionM()
+    {
+        //string userLogin = login;
+        User user = User.GetUser(userLogin);
+        //<UserPage user="@User.GetUser(userLogin)" />;
+    }
+}
+    
+)
