@@ -40,17 +40,14 @@ namespace BlazorApp4.Data
         //    }
         //    return listToReturn;
         //}
-        public static List<string> GetTaskList()
+        public static List<TaskItem> GetTaskList()
         {
             var client = new MongoClient("mongodb://localhost");
             var database = client.GetDatabase("TaskList");
-            var collection = database.GetCollection<TaskItem>("Monday");
+            var collection = database.GetCollection<TaskListDB>("Monday");
             var TaskListFromDB = collection.Find(x => true).ToList();
-            List<string> listToReturn = new List<string>();
-            foreach (var item in TaskListFromDB)
-            {
-                listToReturn.Add(item.Name);
-            }
+            List<TaskItem> listToReturn = new List<TaskItem>();
+            listToReturn.AddRange(collection.Find(x => true).FirstOrDefault().taskList);
             return listToReturn;
         }
     }

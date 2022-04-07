@@ -18,8 +18,8 @@
                     <tbody>
                         <tr>
                             <td>@item.Name</td>
-                            <td><input type="checkbox" @bind-value="item.InProgress" /></td>
-                            <td><input type="checkbox" @bind-value="item.IsDone" /></td>
+                            <td><input type="checkbox" @bind="item.InProgress" /></td>
+                            <td><input type="checkbox" @bind="item.IsDone" /></td>
                             <td><button class="btn btn-danger" @onclick="(() => DeleteTask(item))">Delete Task</button></td>
                         </tr>
                     </tbody>
@@ -42,8 +42,8 @@
 </div>
 
 @code {
-    private List<TaskItem> _tasks = new List<TaskItem>();
-    private List<TaskItem> _tasksFromDB = TaskListDB.GetTaskList();
+    private List<TaskItem> _tasks = TaskListDB.GetTaskList();
+    //private List<TaskItem> _tasksFromDB = TaskListDB.GetTaskList();
 
     private string _newTask;
 
