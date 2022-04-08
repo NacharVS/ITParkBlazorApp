@@ -14,7 +14,7 @@ namespace BlazorApp4.Data
         {
             this.taskList = taskList;
         }
-
+        [BsonIgnoreIfDefault]
         public ObjectId _id { get; set; }
         [BsonElement("ListOfTasks")]
         public List<TaskItem> taskList { get; set; }
@@ -27,14 +27,34 @@ namespace BlazorApp4.Data
             collection.InsertOne(item);
         }
 
-        public static List<TaskItem> GetListOfItems()
+        public static List<TaskItem> GetListOfItems(string searchDay)
         {
-            //var client = new MongoClient();
             var client = new MongoClient("mongodb://localhost");
             var database = client.GetDatabase("TaskList");
-            var collection = database.GetCollection<TaskItem>("Monday");
-            var list = collection.Find(x => true).ToList();
-            return list;
+            if (database.ListCollectionNames().ToList().Exists(x => x == searchDay))
+            {
+                if (string.IsNullOrEmpty(searchDay))
+                {
+                    return null;
+                }
+                else
+                {
+                    var collection = database.GetCollection<TaskListDB>(searchDay);
+                    List<TaskItem> list = new List<TaskItem>();
+                    list.AddRange(collection.Find(x => true).FirstOrDefault().taskList);
+                    //TaskListDB document = collection.Find(x => true).FirstOrDefault();
+                    //foreach (var item in document.taskList)
+                    //{
+                    //    list.Add(item);
+                    //}
+                    return list;
+                }
+            }
+            else
+            {
+                return null;
+            }
+
         }
     }
 }

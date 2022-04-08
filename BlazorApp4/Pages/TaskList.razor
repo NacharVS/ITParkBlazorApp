@@ -3,8 +3,21 @@
 
 <div class="container-fluid">
     <div class="row">
+       <div class="col col-auto">
+           <table class="table table-striped">
+               <thead class="table table-danger">
+                   <tr>
+                       <th><input class="form-control" placeholder="Input day" @bind-value="_searchDay" /></th>
+                       <th><button class="btn btn-dark" @onclick="GetList">Show</button></th>
+                       <th><button class="btn btn-dark">Clear</button></th>
+                   </tr>
+               </thead>
+           </table>
+       </div>
+    </div>
+    <div class="row">
         <div class="col">
-            <h2 class="text-center">TaskList. Count of tasks:@_tasks.Count(x => !x.IsDone)</h2>
+            <h2 class="text-center">@_searchDay. Count of tasks: @if(_tasks!=null) @_tasks.Count(x => !x.IsDone)</h2>
             <table class="table table-striped">
                 <thead class="table-dark">
                     <tr>
@@ -15,33 +28,29 @@
                     </tr>
                    
                 </thead>
-                @foreach (var item in listOfTasks)
-                {
-                    <tbody>
-                       <tr>
-                           <td>@item.Name</td>
-                            <td><input type="checkbox" @bind-value="item.InProgress" /></td>
-                            <td><input type="checkbox" @bind-value="item.IsDone" /></td>
-                            <td><button class="btn btn-danger" @onclick="(() => DeleteTask(item))">Delete Task</button></td>
-                       </tr>
-                    </tbody>
-                }
-                @foreach (var item in _tasks)
+            @if (_tasks!=null)
+            {
+                 @foreach (var item in _tasks)
                 {
                     <tbody>
                         <tr>
                             <td>@item.Name</td>
-                            <td><input type="checkbox" @bind-value="item.InProgress" /></td>
-                            <td><input type="checkbox" @bind-value="item.IsDone" /></td>
+                            <td><input type="checkbox" @bind="item.InProgress" /></td>
+                            <td><input type="checkbox" @bind="item.IsDone" /></td>
                             <td><button class="btn btn-danger" @onclick="(() => DeleteTask(item))">Delete Task</button></td>
                         </tr>
                     </tbody>
-                }
+                }   
+            }
+                
             </table>
 
             <div class="row">
                 <div class="col">
                     <input class="form-control" placeholder="Input new task here" @bind-value="_newTask" />
+                </div>
+                <div class="col">
+                    <input class="form-control" placeholder="Input planning day" @bind-value="_day" />
                 </div>
                 <div class="col col-auto">
                     <button class="btn btn-outline-dark" @onclick="AddNewTaskToList">Add New Task</button>
@@ -55,12 +64,12 @@
 </div>
 
 @code {
-    public List<TaskItem> listOfTasks = TaskListDB.GetListOfItems();
-
-    private List<TaskItem> _tasks = new List<TaskItem>();
 
     private string _newTask;
+    private static string _day = string.Empty;
+    private static string _searchDay = string.Empty;
 
+    private List<TaskItem> _tasks = TaskListDB.GetListOfItems("Monday");
     private void AddNewTaskToList()
     {
         if (!string.IsNullOrEmpty(_newTask))
@@ -77,6 +86,21 @@
 
     private void AddToDB()
     {
-        TaskListDB.AddItem(new TaskListDB(_tasks), "Monday");
+        if (string.IsNullOrEmpty(_day))
+        {
+            if(string.IsNullOrEmpty(_searchDay))
+            { return; }
+            else TaskListDB.AddItem(new TaskListDB(_tasks), _searchDay);
+        }
+        else
+        {
+            TaskListDB.AddItem(new TaskListDB(_tasks), _day);
+            _day = "";
+        }
+        
+    }
+    private void GetList()
+    {
+        _tasks = TaskListDB.GetListOfItems(_searchDay);
     }
 }
