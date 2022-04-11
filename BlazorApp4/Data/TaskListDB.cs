@@ -4,6 +4,7 @@ using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace BlazorApp4.Data
@@ -34,8 +35,9 @@ namespace BlazorApp4.Data
             }
             
         }
-        public static List<TaskItem> GetItem(string searchDay)
+        public static async Task<List<TaskItem>> GetItem(string searchDay)
         {
+            Thread.Sleep(5000);
             var client = new MongoClient("mongodb://localhost");        
             var database = client.GetDatabase("TaskList");
             if (database.ListCollectionNames().ToList().Exists(x => x == searchDay))
@@ -47,13 +49,14 @@ namespace BlazorApp4.Data
                 else
                 {
                     var collection = database.GetCollection<TaskListDB>(searchDay);
-                    List<TaskItem> list = new List<TaskItem>();
-                    list.AddRange(collection.Find(x => true).FirstOrDefault().taskList);
+                    List<TaskListDB> document = await collection.Find(x => true).ToListAsync();
+
                     //TaskListDB document = collection.Find(x => true).FirstOrDefault();
-                    //foreach (var item in document.taskList)
-                    //{
-                    //    list.Add(item);
-                    //}
+                    var list = new List<TaskItem>();
+                    foreach (var item in document)
+                    {
+                        list.AddRange(item.taskList);
+                    }
                     return list;
                 }
             }
