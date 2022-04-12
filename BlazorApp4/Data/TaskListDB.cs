@@ -32,6 +32,7 @@ namespace BlazorApp4.Data
             collection.InsertOne(item);
         }
 
+
         public static List<TaskItem> GetTaskList(string day)
         {
             var client = new MongoClient("mongodb://localhost");

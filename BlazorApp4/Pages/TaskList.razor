@@ -33,6 +33,11 @@
                             <th>Actions</th>
                         </tr>
                     </thead>
+                    @if(_tasks==null)
+            {
+                <div class="text-center">Please select a date from the database</div>
+            }
+                     else
                     @foreach (var item in _tasks)
                     {
                         <tbody>
@@ -65,7 +70,7 @@
     </div>
 
 @code {
-    private static string _day="Monday";
+    private static string _day = "Monday";
     private string _newTask;
     private string _newDay;
     //private List<TaskItem> _tasks = new List<TaskItem>();
@@ -88,16 +93,21 @@
 
     private void AddToDB()
     {
-        if (!string.IsNullOrEmpty(_day))
+        if (!string.IsNullOrEmpty(_day)&&string.IsNullOrEmpty(_newDay))
         {
-
             TaskListDB.AddItem(new TaskListDB(_tasks), _day);
+        }
+        else
+            if (string.IsNullOrEmpty(_day) && !string.IsNullOrEmpty(_newDay))
+        {
+            TaskListDB.AddItem(new TaskListDB(_tasks), _newDay);
         }
         _day = string.Empty;
     }
     private void NewDay()
     {
         _day = _newDay;
-        _tasks = TaskListDB.GetTaskList(_day);
+        _tasks = TaskListDB.GetTaskList(_newDay);
+        _newDay = string.Empty;
     }
 }
