@@ -8,7 +8,7 @@
         <input class="form-control" placeholder="Input planning day" @bind-value="_day" />
     </div>
     <div class="col col-auto">
-        <button class="btn btn-outline-dark" @onclick="AddNewTaskToList">Add New Task</button>
+        <button class="btn btn-outline-dark"=>Add New Task</button>
     </div>
     <div class="col col-auto">
         <button class="btn btn-primary" @onclick="AddToDB">Save Task List</button>
@@ -33,16 +33,7 @@
 
     private string _newTask;
 
-
-
-    private void AddNewTaskToList()
-    {
-        if (!string.IsNullOrEmpty(_newTask))
-        {
-            //_tasks.Add(new TaskItem(_newTask));
-            //_newTask = ""; // string.Empty;
-        }
-    }
+    public EventCallback addNewTaskEvent;
 
 
     private void AddToDB()

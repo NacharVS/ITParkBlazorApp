@@ -43,6 +43,8 @@
             [Parameter]
             public List<TaskItem> _tasks { get; set; }
 
+            //public EventCallback<List<TaskItem>> addNewTaskEvent += ;
+
             private static string _searchDay = string.Empty;
 
             //protected override async Task OnInitializedAsync()
@@ -51,6 +53,14 @@
             //    _tasks = await TaskListDB.GetItem("Monday");
             //}
 
+
+            private void AddNewTaskToList()
+            {
+
+                _tasks.Add(new TaskItem("Take breakfast"));
+                /*_newTask = ""; */// string.Empty;
+
+            }
 
             private void DeleteTask(TaskItem item)
             {

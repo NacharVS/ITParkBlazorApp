@@ -1,22 +1,8 @@
 ﻿@page "/tasklist"
 
 <div class="container-fluid">
-    <div class="row">
-        <div class="col col-auto">
-            <table class="table table-striped">
-                <thead class="table table-danger">
-                    <tr>
-                        <th><input class="form-control" placeholder="Input day" @bind-value="_searchDay" /></th>
-                        <th><button class="btn btn-dark">Show</button></th>
-                        <th><input type="checkbox" @bind-value="_isAdmin">Admin</th>
-                        <th><button class="btn btn-danger" @onclick="SetActive">Actions</button></th>
-                        <th><button class="btn btn-dark">Clear</button></th>
-                    </tr>
-                </thead>
-            </table>
-        </div>
-    </div>
 
+    <HeaderComponent PlaceHolder="Введите день" btn1Name="qqqq" btn2Name="sssss" btn3Name="dddd" btnStyleName="btn btn-dark"/>
 
     <TaskTable _tasks="list2" />
 
@@ -31,17 +17,8 @@
     private bool _isActive;
     private bool _isAdmin;
 
-    private void SetActive()
-    {
-        _isActive = !_isActive;
-    }
-    private string _day;
-
-    private static string _searchDay = string.Empty;
-
-    private string _newTask;
-
     private List<TaskItem> list2 = TaskListDB.GetItem("Monday").GetAwaiter().GetResult();
+
 
 
     //protected override async Task OnInitializedAsync()
