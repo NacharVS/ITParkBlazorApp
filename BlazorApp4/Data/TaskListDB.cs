@@ -37,7 +37,6 @@ namespace BlazorApp4.Data
         }
         public static async Task<List<TaskItem>> GetItem(string searchDay)
         {
-            Thread.Sleep(5000);
             var client = new MongoClient("mongodb://localhost");        
             var database = client.GetDatabase("TaskList");
             if (database.ListCollectionNames().ToList().Exists(x => x == searchDay))

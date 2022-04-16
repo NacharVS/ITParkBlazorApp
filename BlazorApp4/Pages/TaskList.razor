@@ -14,44 +14,9 @@
            </table>
        </div>
     </div>
-    <div class="row">
 
-        <div class="col">
-            <h2 class="text-center">@_searchDay. </h2>
-            <table class="table table-striped">
-                <thead class="table-dark">
-                    <tr>
-                        <th>Mission</th>
-                        <th>In Progress</th>
-                        <th>Is Done</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                @if (_tasks == null)
-                {
-                    <div class="row">No data</div>
-                }
-                else
-                {
-                    if (_tasks.Count == 0)
-                    {
-                        <div class="row">LOADING....</div>
-                    }
-                    else
-                    @foreach (var item in _tasks)
-                    {
-                        <tbody>
-                            <tr>
-                                <td>@item.Name</td>
-                                <td><input type="checkbox" @bind="item.InProgress" /></td>
-                                <td><input type="checkbox" @bind="item.IsDone" /></td>
-                                <td><button class="btn btn-danger" @onclick="(() => DeleteTask(item))">Delete Task</button></td>
-                            </tr>
-                        </tbody>
-                    }
-                }
-            </table>
-
+    <TaskTable />
+    
             <div class="row">
                 <div class="col">
                     <input class="form-control" placeholder="Input new task here" @bind-value="_newTask" />
@@ -67,11 +32,10 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
+
 
 @code {
-    private List<TaskItem> _tasks = new List<TaskItem>();
+
 
     private string _day;
 
@@ -79,33 +43,25 @@
 
     private string _newTask;
 
-    protected override async Task OnInitializedAsync()
-    {
-        //await Task.Delay(2000);
-        _tasks = await TaskListDB.GetItem("Monday");
-    }
+
 
     private void AddNewTaskToList()
     {
-        if (!string.IsNullOrEmpty(_newTask))
-        {
-            _tasks.Add(new TaskItem(_newTask));
-            _newTask = ""; // string.Empty;
-        }
+        //if (!string.IsNullOrEmpty(_newTask))
+        //{
+        //    _tasks.Add(new TaskItem(_newTask));
+        //    _newTask = ""; // string.Empty;
+        //}
     }
 
-    private void DeleteTask(TaskItem item)
-    {
-        _tasks.Remove(item);
-    }
 
     private void AddToDB()
     {
-        if (!string.IsNullOrEmpty(_day))
-        {
-            TaskListDB.AddItem(new TaskListDB(_tasks), _day);
-        }
-        _day = string.Empty;
+        //if (!string.IsNullOrEmpty(_day))
+        //{
+        //    TaskListDB.AddItem(new TaskListDB(_tasks), _day);
+        //}
+        //_day = string.Empty;
     }
 
     private void GetList()
