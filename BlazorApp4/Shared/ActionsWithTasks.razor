@@ -1,24 +1,32 @@
 ﻿@if (actions)
 {
-    <div class="row">
-        <div class="col">
-            <input class="form-control" placeholder="Input new task here" @bind-value="_newTask" />
-        </div>
-        <div class="col">
-            <input class="form-control" placeholder="Input planning day" @bind-value="_day" />
-        </div>
-        <div class="col col-auto">
-            <button class="btn btn-outline-dark" @onclick="AddNewTaskToList">Add New Task</button>
-        </div>
-        <div class="col col-auto">
-            <button class="btn btn-primary" @onclick="AddToDB">Save Task List</button>
-        </div>
+<div class="row">
+    <div class="col">
+        <input class="form-control" placeholder="Input new task here" @bind-value="_newTask" />
     </div>
+    <div class="col">
+        <input class="form-control" placeholder="Input planning day" @bind-value="_day" />
+    </div>
+    <div class="col col-auto">
+        <button class="btn btn-outline-dark" @onclick="AddNewTaskToList">Add New Task</button>
+    </div>
+    <div class="col col-auto">
+        <button class="btn btn-primary" @onclick="AddToDB">Save Task List</button>
+    </div>
+    @if (isAdmin)
+    {
+        <div class="col col-auto">
+            <button class="btn btn-danger" @onclick="AddToDB">Edit</button>
+        </div>
+    }
+</div>
 }
 
 @code {
     [Parameter]
     public bool actions { get; set; }
+    [Parameter]
+    public bool isAdmin { get; set; }
     private string _day;
 
     private static string _searchDay = string.Empty;

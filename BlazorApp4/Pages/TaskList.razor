@@ -8,7 +8,7 @@
                     <tr>
                         <th><input class="form-control" placeholder="Input day" @bind-value="_searchDay" /></th>
                         <th><button class="btn btn-dark">Show</button></th>
-                        <th><input type="checkbox">Admin</th>
+                        <th><input type="checkbox" @bind-value="_isAdmin">Admin</th>
                         <th><button class="btn btn-danger" @onclick="SetActive">Actions</button></th>
                         <th><button class="btn btn-dark">Clear</button></th>
                     </tr>
@@ -21,7 +21,7 @@
     <TaskTable _tasks="list2" />
 
 
-    <ActionsWithTasks actions="_isActive"/>
+    <ActionsWithTasks actions="_isActive" isAdmin="_isAdmin"/>
 
 </div>
 
@@ -29,6 +29,7 @@
 @code {
 
     private bool _isActive;
+    private bool _isAdmin;
 
     private void SetActive()
     {
