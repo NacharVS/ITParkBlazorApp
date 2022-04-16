@@ -40,15 +40,16 @@
 
 
         @code {
-            private List<TaskItem> _tasks = new List<TaskItem>();
+            [Parameter]
+            public List<TaskItem> _tasks { get; set; }
 
             private static string _searchDay = string.Empty;
 
-            protected override async Task OnInitializedAsync()
-            {
-                //await Task.Delay(2000);
-                _tasks = await TaskListDB.GetItem("Monday");
-            }
+            //protected override async Task OnInitializedAsync()
+            //{
+            //    //await Task.Delay(2000);
+            //    _tasks = await TaskListDB.GetItem("Monday");
+            //}
 
 
             private void DeleteTask(TaskItem item)
