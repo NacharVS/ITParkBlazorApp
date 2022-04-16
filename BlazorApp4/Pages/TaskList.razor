@@ -8,6 +8,7 @@
                     <tr>
                         <th><input class="form-control" placeholder="Input day" @bind-value="_searchDay" /></th>
                         <th><button class="btn btn-dark">Show</button></th>
+                        <th><input type="checkbox">Admin</th>
                         <th><button class="btn btn-danger" @onclick="SetActive">Actions</button></th>
                         <th><button class="btn btn-dark">Clear</button></th>
                     </tr>
@@ -20,7 +21,7 @@
     <TaskTable _tasks="list2" />
 
 
-    <ActionsWithTasks />
+    <ActionsWithTasks actions="_isActive"/>
 
 </div>
 
