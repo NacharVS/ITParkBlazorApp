@@ -1,0 +1,90 @@
+﻿<td><button class="@btnStyleName1">@Button</button></td>
+<tr></tr>
+    @if (_isDanger)
+    {
+        btnStyleName1 = "btn btn-danger";
+    }
+    @if (_isLigth)
+    {
+        btnStyleName1 = "btn btn-light";
+    }
+    @if (_isPrimary)
+    {
+        btnStyleName1 = "btn btn-primary";
+    }
+    @if (_isToolbar)
+    {
+        btnStyleName1 = "btn btn-toolbar";
+    }
+    @if (_isDark)
+    {
+        btnStyleName1 = "btn btn-dark";
+    }
+    <td><button class="btn btn-danger" @onclick="SetDanger">@Danger</button></td>
+    <td><button class="btn btn-light" @onclick="SetLigth">@Ligth</button></td>
+    <td><button class="btn btn-primary" @onclick="SetPrimary">@Primary</button></td>
+    <td><button class="btn btn-toolbar" @onclick="SetToolbar">@Toolbar</button></td>
+    <td><button class="btn btn-dark" @onclick="SetDark">@Dark</button></td>
+    @code {
+        [Parameter]
+        public string Button { get; set; }
+        [Parameter]
+        public string Danger { get; set; }
+        [Parameter]
+        public string Ligth { get; set; }
+        [Parameter]
+        public string Primary { get; set; }
+        [Parameter]
+        public string Toolbar { get; set; }
+        [Parameter]
+        public string Dark { get; set; }
+        [Parameter]
+        public string btnStyleName1 { get; set; }
+
+        private bool _isDanger;
+        private bool _isLigth;
+        private bool _isPrimary;
+        private bool _isToolbar;
+        private bool _isDark;
+
+        private void SetDanger()
+        {
+            _isDanger = true;
+            _isLigth = false;
+            _isPrimary = false;
+            _isToolbar = false;
+            _isDark = false;
+        }
+        private void SetLigth()
+        {
+            _isLigth = true;
+            _isDanger = false;
+            _isPrimary = false;
+            _isToolbar = false;
+            _isDark = false;
+        }
+        private void SetPrimary()
+        {
+            _isPrimary = true;
+            _isLigth = false;
+            _isDanger = false;
+            _isToolbar = false;
+            _isDark = false;
+        }
+        private void SetToolbar()
+        {
+            _isToolbar = true;
+            _isLigth = false;
+            _isPrimary = false;
+            _isDanger = false;
+            _isDark = false;
+        }
+        private void SetDark()
+        {
+            _isDark = true;
+            _isLigth = false;
+            _isPrimary = false;
+            _isToolbar = false;
+            _isDanger = false;
+        }
+    }

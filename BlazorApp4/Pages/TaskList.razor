@@ -1,113 +1,52 @@
 ﻿@page "/tasklist"
 
 <div class="container-fluid">
-    <div class="row">
-        @*<div class="col table-danger">
-            <tr>
-                <tbody class="table table-danger">
-                <th> <input class="form-control" placeholder="Input day" /></th>
-                </tbody>
-            </tr>
-        </div>*@
-            <div class="col col-auto">
-                <table class="table table-striped">
-                    <tbody class="table table-danger">
-                        <tr>
-                            <th> <input class="form-control" placeholder="Input day" @bind-value="_newDay"/></th>
-                            <th><button class="btn btn-dark" @onclick="NewDay">Show</button> </th>
-                            <th><button class="btn btn-dark">Clear</button> </th>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <h2 class="text-center">TaskList. Count of tasks:@_tasks.Count(x => !x.IsDone)</h2>
-                <table class="table table-striped">
-                    <thead class="table-dark">
-                        <tr>
-                            <th>Mission</th>
-                            <th>In Progress</th>
-                            <th>Is Done</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    @if(_tasks==null)
-            {
-                <div class="text-center">Please select a date from the database</div>
-            }
-                     else
-                    @foreach (var item in _tasks)
-                    {
-                        <tbody>
-                            <tr>
-                                <td>@item.Name</td>
-                                <td><input type="checkbox" @bind="item.InProgress" /></td>
-                                <td><input type="checkbox" @bind="item.IsDone" /></td>
-                                <td><button class="btn btn-danger" @onclick="(() => DeleteTask(item))">Delete Task</button></td>
-                            </tr>
-                        </tbody>
-                    }
-                </table>
 
-                <div class="row">
-                    <div class="col">
-                        <input class="form-control" placeholder="Input new task here" @bind-value="_newTask" />
-                    </div>
-                    <div class="col">
-                        <input class="form-control" placeholder="Input planning Day" @bind-value="_day" />
-                    </div>
-                    <div class="col col-auto">
-                        <button class="btn btn-outline-dark" @onclick="AddNewTaskToList">Add New Task</button>
-                    </div>
-                    <div class="col col-auto">
-                        <button class="btn btn-primary" @onclick="AddToDB">Save Task List</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <HeaderComponent PlaceHolder="Введите день" btn1Name="qqqq" btn2Name="sssss" btn3Name="dddd" btnStyleName="btn btn-dark" />
+
+    <TaskTable _tasks="list2" />
+
+
+    <ActionsWithTasks actions="_isActive" isAdmin="_isAdmin" />
+
+</div>
+
 
 @code {
-    private static string _day = "Monday";
-    private string _newTask;
-    private string _newDay;
-    //private List<TaskItem> _tasks = new List<TaskItem>();
-    private List<TaskItem> _tasks = TaskListDB.GetTaskList(_day);
-    //private List<TaskItem> _tasksFromDB = TaskListDB.GetTaskList();
+
+    private bool _isActive;
+    private bool _isAdmin;
+
+    private List<TaskItem> list2 = TaskListDB.GetItem("Monday").GetAwaiter().GetResult();
+
+
+
+    //protected override async Task OnInitializedAsync()
+    //{
+    //    list = await TaskListDB.GetItem("Thuesday");
+    //}
 
     private void AddNewTaskToList()
     {
-        if (!string.IsNullOrEmpty(_newTask))
-        {
-            _tasks.Add(new TaskItem(_newTask));
-            _newTask = string.Empty;
-        }
+        //if (!string.IsNullOrEmpty(_newTask))
+        //{
+        //    _tasks.Add(new TaskItem(_newTask));
+        //    _newTask = ""; // string.Empty;
+        //}
     }
 
-    private void DeleteTask(TaskItem item)
-    {
-        _tasks.Remove(item);
-    }
 
     private void AddToDB()
     {
-        if (!string.IsNullOrEmpty(_day)&&string.IsNullOrEmpty(_newDay))
-        {
-            TaskListDB.AddItem(new TaskListDB(_tasks), _day);
-        }
-        else
-            if (string.IsNullOrEmpty(_day) && !string.IsNullOrEmpty(_newDay))
-        {
-            TaskListDB.AddItem(new TaskListDB(_tasks), _newDay);
-        }
-        _day = string.Empty;
+        //if (!string.IsNullOrEmpty(_day))
+        //{
+        //    TaskListDB.AddItem(new TaskListDB(_tasks), _day);
+        //}
+        //_day = string.Empty;
     }
-    private void NewDay()
-    {
-        _day = _newDay;
-        _tasks = TaskListDB.GetTaskList(_newDay);
-        _newDay = string.Empty;
-    }
+
+    //private void GetList()
+    //{
+    //    _tasks = TaskListDB.GetItem(_searchDay);
+    //}
 }
