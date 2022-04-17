@@ -8,7 +8,7 @@
                <thead class="table table-danger">
                    <tr>
                        <th><input class="form-control" placeholder="Input day" @bind-value="_searchDay" /></th>
-                       <th><button class="btn btn-dark" @onclick="GetList">Show</button></th>
+                       <th><button class="btn btn-dark" @*@onclick="GetList"*@>Show</button></th>
                        <th><button class="btn btn-dark">Clear</button></th>
                    </tr>
                </thead>
@@ -69,7 +69,15 @@
     private static string _day = string.Empty;
     private static string _searchDay = string.Empty;
 
-    private List<TaskItem> _tasks = TaskListDB.GetListOfItems("Monday");
+    //private List<TaskItem> _tasks = TaskListDB.GetListOfItems("Monday");
+    private List<TaskItem> _tasks = new List<TaskItem>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        //await Task.Delay(2000);
+        _tasks = await TaskListDB.GetItem("Monday");
+    }
+
     private void AddNewTaskToList()
     {
         if (!string.IsNullOrEmpty(_newTask))
@@ -101,6 +109,6 @@
     }
     private void GetList()
     {
-        _tasks = TaskListDB.GetListOfItems(_searchDay);
+        //_tasks = TaskListDB.GetListOfItems(_searchDay);
     }
 }
