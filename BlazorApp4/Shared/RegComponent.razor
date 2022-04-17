@@ -1,0 +1,35 @@
+﻿<div class="modal-body">
+    @if (RegistrationIsActive)
+    {
+        <table class="table table-responsive-md">
+            <thead class="table-dark">
+                <tr>
+                    <th><h2>Registration</h2></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input class="form-control" placeholder="Login" @bind-value="_login"/></td>
+                </tr>
+                <tr>
+                    <td><input class="form-control" placeholder="Password" /></td>
+                </tr>
+                <tr>
+                    <td><input class="form-control" placeholder="Password again" /></td>
+                </tr>
+                <tr>
+                    <td><input class="form-control" placeholder="E-mail" /></td>
+                </tr>
+                <tr>
+                    <td><input class="form-control" placeholder="Phone Number" /></td>
+                </tr>
+            </tbody>
+        </table>}
+</div>
+
+@code {
+    [Parameter]
+    public bool RegistrationIsActive { get; set; }
+
+    private string _login;
+}

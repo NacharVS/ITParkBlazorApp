@@ -30,8 +30,8 @@
     private string _day;
 
     private static string _searchDay = string.Empty;
-
-    private string _newTask;
+    [Parameter]
+    public string _newTask { get; set; }
     [Parameter]
     public EventCallback<string> addNewTaskEvent { get; set; }
 
@@ -49,4 +49,5 @@
     {
         //_tasks = TaskListDB.GetItem(_searchDay);
     }
+
 }

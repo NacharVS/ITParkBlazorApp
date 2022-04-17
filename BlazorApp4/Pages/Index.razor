@@ -1,22 +1,14 @@
 ﻿@page "/index"
-<input class="active" @bind-value="b" />
+<RegComponent RegistrationIsActive="_trigger"></RegComponent>
 
-<Button   Index="a" Width1="b"/>
-
-<button  class="btn btn-primary"  @onclick="Change">Click me</button>
+<button class="btn btn-primary" @onclick="Change">Regitration</button>
 
 @code{
-    private int a=0;
-    private string b = "w-25";
+    private bool _trigger = false;
 
     private void Change()
     {
-        if (a > 2)
-        {
-            a = 0;
-        }
-        else
-            a++;
+        _trigger = !_trigger;
     }
 
 }
