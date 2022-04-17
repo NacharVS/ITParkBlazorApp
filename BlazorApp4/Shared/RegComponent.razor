@@ -9,7 +9,7 @@
             </thead>
             <tbody>
                 <tr>
-                    <td><input class="form-control" placeholder="Login" @bind-value="_login"/></td>
+                    <td><input class="form-control" placeholder="Login" @bind-value="_login" /></td>
                 </tr>
                 <tr>
                     <td><input class="form-control" placeholder="Password" /></td>
@@ -23,6 +23,15 @@
                 <tr>
                     <td><input class="form-control" placeholder="Phone Number" /></td>
                 </tr>
+                <tr>
+                    <td><button @onclick="Registration">Regist</button></td>
+                </tr>
+                @if (_isRegComplete)
+                {
+                    <tr>
+                        <td class="alert-danger"><h3>Registration succesfull done</h3></td>
+                    </tr>
+                }
             </tbody>
         </table>}
 </div>
@@ -31,5 +40,12 @@
     [Parameter]
     public bool RegistrationIsActive { get; set; }
 
+    private bool _isRegComplete;
+
     private string _login;
+
+    private void Registration()
+    {
+        _isRegComplete = !_isRegComplete;
+    }
 }
