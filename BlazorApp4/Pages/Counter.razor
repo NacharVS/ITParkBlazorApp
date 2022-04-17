@@ -8,11 +8,8 @@
 }
 
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
-
 <br>
-
-<input @bind-value="currentCount"/>
-
+@*<input @bind-value="currentCount"/>*@
 <ButtonGroup content="list"></ButtonGroup>
 
 <ul class="nav flex-column">
@@ -24,6 +21,8 @@
     </li>
     <li class="nav-item px-3">
         3333
+
+
     </li>
     <li class="nav-item px-3">
         4444
@@ -33,10 +32,12 @@
     </li>
 </ul>
 
+
+
 @code {
     private int currentCount = 0;
 
-    private List<string> list = new List<string>() { "1", "2", "3", "4", "5"};
+    private List<string> list = new List<string>() { "Add", "Edit", "Remove"};
 
     private void IncrementCount()
     {

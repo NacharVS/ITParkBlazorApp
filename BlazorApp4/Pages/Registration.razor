@@ -1,45 +1,22 @@
 ﻿@page "/regist"
+<div class="container-fluid">
 
-<h1>Registration</h1>
+    <RegistrationComponent RegistrationIsActive="_trigger"></RegistrationComponent>
+    <button class="btn btn-primary" @onclick="Change">Regitration</button>
+</div>
+    
 
-<h4>Login</h4>
 
-<input @bind-value="Login"/>
 
-<h4>Name</h4>
-
-<input @bind-value="Name" />
-
-<h4>Surname</h4>
-
-<input @bind-value="Surname" />
-
-<h4>Phone Number</h4>
-
-<input @bind-value="Phone" />
-
-<br />
-
-<button class="btn btn-primary" @onclick="UserRegistration">SignIn</button>
-
-<button class="btn btn-primary" @onclick="FieldsClear">Clear</button>
 
 @code {
-    private string Login;
-    private string Name;
-    private string Surname;
-    private string Phone;
-    private string qq = "sdadasdads";
+    private bool _isRegistration=false;
+    
+    private bool _trigger = false;
 
-    private void FieldsClear()
+    private void Change()
     {
-        Login = "";
-        Name = "";
-        Surname = "";
-        Phone = "";
+        _trigger = !_trigger;
     }
-    private void UserRegistration()
-    {
-        User.AddUserToDB(Login,Name,Surname,Phone);
-    }
+
 }

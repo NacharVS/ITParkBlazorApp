@@ -1,8 +1,22 @@
-﻿<button class="btn btn-danger">@ButtonContent</button>
+﻿<button class=@res>@ButtonContent</button>
 <br />
 
 @code {
     [Parameter]
     public string ButtonContent { get; set; }
+
+    [Parameter]
+    public string Width1 { get; set; }
+    [Parameter]
+    public int Index { get; set; } = 0;
+
+    private string res;
+
+    protected override void OnInitialized()
+    {
+       res = (mass[Index] + Width1);
+    }
+
+    string[] mass = new string[3] { "btn btn-danger ", "btn btn-dark ", "btn btn-info " };
 
 }
