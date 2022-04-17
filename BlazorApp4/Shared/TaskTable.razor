@@ -29,41 +29,43 @@
                                 <td>@item.Name</td>
                                 <td><input type="checkbox" @bind="item.InProgress" /></td>
                                 <td><input type="checkbox" @bind="item.IsDone" /></td>
-                                <td><button class="btn btn-danger" @onclick="(() => DeleteTask(item))">Delete Task</button></td>
+                                <td><button class="btn btn-danger " @onclick="(() => DeleteTask(item))">Delete Task</button></td>
                             </tr>
                         </tbody>
                     }
                 }
         </table>
-        </div>
     </div>
+</div>
+
+<ActionsWithTasks actions="true" addNewTaskEvent="AddNewTaskToList" />
 
 
-        @code {
-            [Parameter]
-            public List<TaskItem> _tasks { get; set; }
+@code {
+    [Parameter]
+    public List<TaskItem> _tasks { get; set; }
 
-            //public EventCallback<List<TaskItem>> addNewTaskEvent += ;
+    //public EventCallback<List<TaskItem>> addNewTaskEvent += ;
 
-            private static string _searchDay = string.Empty;
+    private static string _searchDay = string.Empty;
 
-            //protected override async Task OnInitializedAsync()
-            //{
-            //    //await Task.Delay(2000);
-            //    _tasks = await TaskListDB.GetItem("Monday");
-            //}
+    //protected override async Task OnInitializedAsync()
+    //{
+    //    //await Task.Delay(2000);
+    //    _tasks = await TaskListDB.GetItem("Monday");
+    //}
 
 
-            private void AddNewTaskToList()
-            {
+    private void AddNewTaskToList()
+    {
 
-                _tasks.Add(new TaskItem("Take breakfast"));
-                /*_newTask = ""; */// string.Empty;
+        _tasks.Add(new TaskItem("Take breakfast"));
+        /*_newTask = ""; */// string.Empty;
 
-            }
+    }
 
-            private void DeleteTask(TaskItem item)
-            {
-                _tasks.Remove(item);
-            }
-        }
+    private void DeleteTask(TaskItem item)
+    {
+        _tasks.Remove(item);
+    }
+}

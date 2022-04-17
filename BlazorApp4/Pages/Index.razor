@@ -1,6 +1,22 @@
 ﻿@page "/index"
+<input class="active" @bind-value="b" />
 
+<Button   Index="a" Width1="b"/>
+
+<button  class="btn btn-primary"  @onclick="Change">Click me</button>
 
 @code{
+    private int a=0;
+    private string b = "w-25";
+
+    private void Change()
+    {
+        if (a > 2)
+        {
+            a = 0;
+        }
+        else
+            a++;
+    }
 
 }
