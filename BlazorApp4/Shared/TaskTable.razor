@@ -11,6 +11,14 @@
                     <th>Actions</th>
                 </tr>
             </thead>
+            @*<GenericTemplate Items="_tasks">
+                <ItemTemplate Context="item">
+                    <td>@item.Name</td>
+                    <td><input type="checkbox" @bind="item.InProgress" /></td>
+                    <td><input type="checkbox" @bind="item.IsDone" /></td>
+                    <td><button class="btn btn-danger ">Delete Task</button></td>
+                </ItemTemplate>
+            </GenericTemplate>*@
             @if (_tasks == null)
             {
                 <div class="row">No data</div>
@@ -38,33 +46,21 @@
     </div>
 </div>
 
-<ActionsWithTasks actions="true" addNewTaskEvent="AddNewTaskToList" _newTask="buff"/>
+<ActionsWithTasks actions="true" addNewTaskEvent="AddNewTaskToList" />
 
 
 @code {
     [Parameter]
     public List<TaskItem> _tasks { get; set; }
 
-    string buff;
-
-    //public EventCallback<List<TaskItem>> addNewTaskEvent += ;
-
     private static string _searchDay = string.Empty;
 
-    //protected override async Task OnInitializedAsync()
-    //{
-    //    //await Task.Delay(2000);
-    //    _tasks = await TaskListDB.GetItem("Monday");
-    //}
-
-
-    private void AddNewTaskToList()
+    private void AddNewTaskToList(string buff)
     {
 
         _tasks.Add(new TaskItem(buff));
         /*_newTask = ""; */// string.Empty;
 
     }
-
 
 }

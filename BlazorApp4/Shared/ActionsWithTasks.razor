@@ -30,8 +30,8 @@
     private string _day;
 
     private static string _searchDay = string.Empty;
-    [Parameter]
-    public string _newTask { get; set; }
+
+    private string _newTask { get; set; }
     [Parameter]
     public EventCallback<string> addNewTaskEvent { get; set; }
 
