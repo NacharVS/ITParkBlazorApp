@@ -21,13 +21,13 @@
             </GenericTemplate>*@
             @if (_tasks == null)
             {
-                <div class="row">No data</div>
+                @ListNull
             }
             else
             {
                 if (_tasks.Count == 0)
                 {
-                    <div class="row">LOADING....</div>
+                    @ListEmpty
                 }
                 else
                     @foreach (var item in _tasks)
@@ -54,6 +54,9 @@
     public List<TaskItem> _tasks { get; set; }
 
     private static string _searchDay = string.Empty;
+
+    [Parameter] public RenderFragment ListNull { get; set; }
+    [Parameter] public RenderFragment ListEmpty { get; set; }
 
     private void AddNewTaskToList(string buff)
     {
