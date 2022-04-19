@@ -11,15 +11,15 @@
                     <th>Actions</th>
                 </tr>
             </thead>
-            @*<GenericTemplate Items="_tasks">
+            <GenericTemplate Items="_tasks">
                 <ItemTemplate Context="item">
                     <td>@item.Name</td>
                     <td><input type="checkbox" @bind="item.InProgress" /></td>
                     <td><input type="checkbox" @bind="item.IsDone" /></td>
                     <td><button class="btn btn-danger ">Delete Task</button></td>
                 </ItemTemplate>
-            </GenericTemplate>*@
-            @if (_tasks == null)
+            </GenericTemplate>
+            @*@if (_tasks == null)
             {
                 @ListNull
             }
@@ -41,7 +41,7 @@
                             </tr>
                         </tbody>
                     }
-                }
+                }*@
         </table>
     </div>
 </div>
@@ -62,6 +62,7 @@
     {
 
         _tasks.Add(new TaskItem(buff));
+        StateHasChanged();
         /*_newTask = ""; */// string.Empty;
 
     }
