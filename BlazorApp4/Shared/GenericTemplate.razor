@@ -1,0 +1,27 @@
+﻿@typeparam TItem
+
+@if (Items == null)
+{
+    <div class="row">@ChildContent</div>
+}
+else
+{
+    if (Items.Count == 0)
+    {
+        <div class="row">LOADING....</div>
+    }
+    else
+        @foreach (var item in Items)
+        {
+            @ItemTemplate(item);
+        }
+    }
+
+@code {
+
+    [Parameter] public RenderFragment ChildContent { get; set; }
+    [Parameter] public RenderFragment<TItem> ItemTemplate { get; set; }
+
+    [Parameter] public List<TItem> Items { get; set; }
+
+}
