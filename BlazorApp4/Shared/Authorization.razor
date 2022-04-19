@@ -1,0 +1,60 @@
+﻿<div class="modal-body">
+    @if (AuthorizationIsActive)
+    {
+        <table class="table table-responsive-md">
+            <thead class="table-dark">
+                <tr>
+                    <th><h2>Authorization</h2></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input class="form-control" placeholder="Login" @bind-value="_login" /></td>
+                </tr>
+                <tr>
+                    <td><input class="form-control" type="password" placeholder="Password" /></td>
+                </tr>
+                <tr>
+                    <td><button @onclick="NewAuthorization">Authorization</button></td>
+                </tr>
+                @if (_isRegComplete)
+                {
+                    <tr>
+                        <td class="alert-danger"><h3>Authorization succesfull done</h3></td>
+                    </tr>
+                }
+            </tbody>
+        </table>}
+</div>
+
+@code {
+    [Parameter]
+    public bool AuthorizationIsActive { get; set; }
+
+    private bool _isRegComplete;
+    private bool _isRegNotComplete;
+
+    private string _login;
+    private string _password;
+
+
+    private void NewAuthorization()
+    {
+        _isRegComplete = !_isRegComplete;
+    }
+
+    //private void Registration()                    //<==Переделать
+    //{
+    //    if (_isRegComplete)
+    //    {
+    //        _isRegComplete = true;
+    //        _isRegNotComplete = false;
+    //        //TaskListDB.AddUser(_login, _password);
+    //    }
+    //    else
+    //    {
+    //        _isRegNotComplete = true;
+    //        _isRegComplete = false;
+    //    }
+    //}
+}

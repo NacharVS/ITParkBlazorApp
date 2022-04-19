@@ -1,41 +1,20 @@
-﻿@page "/"
+﻿@page "/index"
+<RegInput RegistrationIsActive="_callReg"></RegInput>
+<Authorization AuthorizationIsActive="_callAuthorization"></Authorization>
 
+<button class="btn btn-primary" @onclick="ChangeReg">Regitration</button>
+<button class="btn btn-primary" @onclick="ChangeAuthorization">Authorization</button>
 
-<h1>Calculator</h1>
-<h5>@currentCount</h5>
+@code{
+    private bool _callReg = false;
+    private bool _callAuthorization = false;
 
-
-<button class="btn btn-primary" @onclick="AddDigit1">1</button>
-<button class="btn btn-primary" @onclick="AddDigit2">2</button>
-<button class="btn btn-primary" @onclick="AddDigit3">3</button>
-<button class="btn btn-primary" @onclick="Plus">+</button>
-<br />
-<button class="btn btn-primary" @onclick="Result">Result</button>
-
-@code
+    private void ChangeReg()
     {
-    private string currentCount;
-    private int buffer;
-
-    private void AddDigit1()
-    {
-        currentCount += "1";
+        _callReg = !_callReg;
     }
-    private void AddDigit2()
+    private void ChangeAuthorization()
     {
-        currentCount += "2";
-    }
-    private void AddDigit3()
-    {
-        currentCount += "3";
-    }
-    private void Plus()
-    {
-        buffer += Convert.ToInt32(currentCount);
-        currentCount = "";
-    }
-    private void Result()
-    {
-        currentCount = (Convert.ToInt32(currentCount) + buffer).ToString();
+        _callAuthorization = !_callAuthorization;
     }
 }

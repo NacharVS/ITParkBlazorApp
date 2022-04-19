@@ -49,6 +49,7 @@ namespace BlazorApp4.Data
                 {
                     var collection = database.GetCollection<TaskListDB>(searchDay);
                     List<TaskListDB> document = await collection.Find(x => true).ToListAsync();
+
                     //TaskListDB document = collection.Find(x => true).FirstOrDefault();
                     var list = new List<TaskItem>();
                     foreach (var item in document)
@@ -62,7 +63,13 @@ namespace BlazorApp4.Data
             {
                 return null;
             }
-
+        }
+        public static void AddUser(string login, string password, string email, string phone) //Добавление в БД
+        {
+            var client = new MongoClient("mongodb://localhost");
+            var database = client.GetDatabase("Blazor");
+            var collection = database.GetCollection<User>("Users");
+            collection.InsertOne(new User(login, password, email, phone));
         }
     }
 }

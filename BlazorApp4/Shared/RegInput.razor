@@ -1,0 +1,75 @@
+﻿<div class="modal-body">
+    @if (RegistrationIsActive)
+    {
+        <table class="table table-responsive-md">
+            <thead class="table-dark">
+                <tr>
+                    <th><h2>Registration</h2></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input class="form-control" placeholder="Login" @bind-value="_login" /></td>
+                </tr>
+                <tr>
+                    <td><input class="form-control" type="password" placeholder="Password" @bind-value="_password" /></td>
+                </tr>
+                <tr>
+                    <td><input class="form-control" type="password" placeholder="Password again" @bind-value="_passwordAgain" /></td>
+                </tr>
+                <tr>
+                    <td><input class="form-control" placeholder="E-mail" @bind-value="_email" /></td>
+                </tr>
+                <tr>
+                    <td><input class="form-control" placeholder="Phone Number" @bind-value="_phone" /></td>
+                </tr>
+                <tr>
+                    <td><button @onclick="Registration">Regist</button></td>
+                </tr>
+
+                @if (_isRegComplete == true)
+                {
+                    <tr>
+                        <td class="alert-danger"><h3>Registration succesfull done</h3></td>
+                    </tr>
+                }
+                @if (_isRegNotComplete == true)
+                {
+                    <tr>
+                        <td class="alert-danger"><h3>Entered the password incorrectly</h3></td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>}
+</div>
+
+@code {
+    [Parameter]
+    public bool RegistrationIsActive { get; set; }
+
+    private bool _isRegComplete;
+    private bool _isRegNotComplete;
+
+    private string _login;
+    private string _password;
+    private string _passwordAgain;
+    private string _email;
+    private string _phone;
+
+    private void Registration()
+    {
+        if (_password == _passwordAgain)
+        {
+            _isRegComplete = true;
+            _isRegNotComplete = false;
+            TaskListDB.AddUser(_login, _password, _email, _phone);
+        }
+        else
+        {
+            _isRegNotComplete = true;
+            _isRegComplete = false;
+        }
+
+    }
+}
