@@ -1,0 +1,127 @@
+﻿@page "/regist"
+
+<RegComponent RegistrationIsActive="true">
+    <ChildFragment>
+        <thead class="table-dark">
+            <tr>
+                <th><h2>Registration</h2></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><input class="text" placeholder="Surname"  @bind-value="Surname" /></td>
+            </tr>
+            <tr>
+                <td><input type="text" placeholder="Name" @bind-value="Name" /></td>
+            </tr>
+            <tr>
+                <td><input type="text" placeholder="PhoneNamber"  @bind-value="Phone" /></td>
+            </tr>
+            <tr>
+                <td> <input type="text" placeholder="Login"  @bind-value="Login" /></td>
+            </tr>
+            <tr>
+                <td><input type="text" placeholder="Password"  @bind-value="Password" /></td>
+            </tr>
+            <div class="col col-auto">
+                <button class="btn btn-outline-danger" @onclick="Registrated">Registration</button>
+            </div>
+            <br />
+             <tr>
+                    <td class="alert-light" ><h3>@message</h3></td>
+                </tr>
+            <ShowWindow @ref="showWindow" Message="@message" onCancel="Cancel"></ShowWindow>
+         </tbody>
+    </ChildFragment>
+</RegComponent>
+
+
+@code {
+    private string Surname;
+    private string Name;
+    private string Phone;
+    private string Login;
+    private string Password;
+    private string message;
+
+    private void RegistratedD()
+    {
+        Login = "";
+    }
+
+
+    private void Registrated()
+    {
+        if(Login == User.GetLoginUser(Login).Login)
+        {
+            message = "This login is already in use! Try again";
+            showWindow.Show(); 
+        }
+        else
+        {
+        User.AddMongoDB(new User(Surname, Name, Phone, Login, Password));
+        message = "Registration succesfull done!";
+        showWindow.Show(); 
+       }
+    }
+
+    ShowWindow showWindow;
+    void Cancel()
+    {
+        showWindow.Hide();
+    }
+}
+
+
+
+
+
+
+@*@using MongoDB.Driver
+
+
+    <h3>Registration</h3>
+    <input type="text"  placeholder="Surname" required @bind-value="Surname"/>
+    <br />
+    <br />
+    <input type="text"  placeholder="Name" required @bind-value="Name"/>
+    <br />
+    <br />
+    <input type="text"  placeholder="Login" required  @bind-value="Login"/>
+    <br />
+    <br />
+    <input type="text"  placeholder="Password" required @bind-value="Password"/>
+    <br />
+    <br />
+    <button class="btn btn-primary" @onclick="Registrated">Registrated</button>
+    <ShowWindow @ref="showWindow" onCancel="OnCancel">
+    <div class="text-dark">You have successfully registered!</div>
+    </ShowWindow>
+
+    @code {
+
+    private string Surname;
+    private string Name;
+    private string Phone;
+    private string Login;
+    private string Password;
+
+    private void Registrated()
+    {
+    User.AddMongoDB(new User(Surname,Name,Phone,Login));
+    }
+
+
+
+    //private void ClearInputs()
+    //{
+    //    Surname = "";
+    //    Name = "";
+    //    Phone = "";
+    //    Login = "";
+    //    StateHasChanged();
+    //}
+
+
+    }
+*@

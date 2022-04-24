@@ -1,0 +1,62 @@
+﻿@page "/authorization"
+
+<div class="modal-body">
+    <table class="table table-responsive-md">
+        <thead class="table-dark">
+            <tr>
+                <th><h2>Authorization</h2></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td> <input type="text" placeholder="Login" @bind-value="Login" /></td>
+            </tr>
+            <tr>
+                <td><input type="text" placeholder="Password" @bind-value="Password" /></td>
+            </tr>
+            <div class="col col-auto">
+                <button class="btn btn-outline-danger" @onclick="LogIn">Login in</button>
+            </div>
+            <br />
+
+            <tr>
+                <td class="alert-light"><h3>@message</h3></td>
+            </tr>
+            <ShowWindow @ref="showWindow" Message="@message" onCancel="Cancel"></ShowWindow>
+        </tbody>
+    </table>
+</div>
+
+@code {
+    private string Login;
+    private string Password;
+    private string message;
+
+    private void LogIn()
+    {
+        if (User.GetLoginUser(Login).Login == null)
+        {
+            //throw new ArgumentNullException("This login does not exist!");
+            message = "This login does not exist!";
+            showWindow.Show();
+        }
+
+        if (Login == User.GetLoginUser(Login).Login)
+        {
+
+            message = "Authorization was successful!";
+            showWindow.Show();
+        }
+        else
+        {
+            message = "Invalid Login or Password!";
+            showWindow.Show();
+        }
+    }
+
+    ShowWindow showWindow;
+    void Cancel()
+    {
+        showWindow.Hide();
+    }
+}

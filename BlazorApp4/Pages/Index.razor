@@ -1,6 +1,69 @@
 ﻿@page "/"
+@using BlazorApp4.Pages.RegAutoreg
 
-<LoginList Logins="@User.GetList()" IsDemo="true" />
-@code{
+<div class="row">
+    <div class="col">
+        <h2  class="text-info">Choose what you need to do: Register or Authorisation.</h2>
+        <h3 class="text-info">Click on the appropriate button below:</h3>
+        <br />
+        <div class="col-3 text-left">
+    <button class="btn btn-outline-danger" @onclick="IsRegistated">Registration</button>
+</div>
+<br />
+<div class="col-3 text-left">
+    <button class="btn btn-info" @onclick="IsAuthorisated">Authorisation</button>
+</div>
+    </div>
+</div>
+
+  @* <div class="col-3 text-left">
+    <NavLink class="btn btn-outline-danger" href="regist">Registration</NavLink>
+    </div>
+    <br />
+    <div class="col-3 text-left">
+    <NavLink class="btn btn-info" href="authorization">Authorisation</NavLink>
+    </div>*@
+<br />
+@if (isRegistration)
+{
+    <Registration />
+}
+@if (isAuthorisation)
+{
+    <Authorisation />
+}
+
+@code {
+    bool isRegistration = false;
+    bool isAuthorisation = false;
+
+    void IsRegistated()
+    {
+        isRegistration = true;
+        isAuthorisation = false;
+    }
+    
+    void IsAuthorisated()
+    {   
+        isRegistration = false;
+        isAuthorisation = true;
+    }
+
+
+
+
+    //<LoginList Logins="@User.GetListDB()" IsDemo="false"/>
+    //private int a;
+    //private void Change()
+    //{
+    //    if (a>2)
+    //    {
+    //        a = 2;
+    //    }
+    //    else
+    //    a++;
+    //}
+
+
 }
 
