@@ -4,36 +4,45 @@
         <h2 class="text-center">@_searchDay. </h2>
         <table class="table table-striped">
             <thead class="table-dark">
-                <tr>
-                    <th>Mission</th>
-                    <th>In Progress</th>
-                    <th>Is Done</th>
-                    <th>Actions</th>
-                </tr>
+                @if (_tasks != null)
+                {
+                    <tr>
+                        <th>Mission</th>
+                        <th>In Progress</th>
+                        <th>Is Done</th>
+                        <th>Actions</th>
+                    </tr>
+                }
+                else
+                {
+                    <tr>
+                        <th>Name</th>
+                        <th>Surname</th>
+                        <th>Phone</th>
+                    </tr>
+                }
             </thead>
-            @if (_tasks == null)
+            @if (_tasks != null)
             {
-                <div class="row">No data</div>
+                <GenericTemplate Items="_tasks">
+                    <ItemTemplate Context="item">
+                        <td>@item.Name</td>
+                        <td><input type="checkbox" @bind="item.InProgress" /></td>
+                        <td><input type="checkbox" @bind="item.IsDone" /></td>
+                        <td><button class="btn btn-danger" @onclick="(() => DeleteTask(item))">Delete Task</button></td>
+                    </ItemTemplate>
+                </GenericTemplate>
             }
             else
             {
-                if (_tasks.Count == 0)
-                {
-                    <div class="row">LOADING....</div>
-                }
-                else
-                    @foreach (var item in _tasks)
-                    {
-                        <tbody>
-                            <tr>
-                                <td>@item.Name</td>
-                                <td><input type="checkbox" @bind="item.InProgress" /></td>
-                                <td><input type="checkbox" @bind="item.IsDone" /></td>
-                                <td><button class="btn btn-danger" @onclick="(() => DeleteTask(item))">Delete Task</button></td>
-                            </tr>
-                        </tbody>
-                    }
-                }
+                <GenericTemplate Items="_users">
+                    <ItemTemplate Context="item">
+                        <td>@item.Name</td>
+                        <td>@item.SurName</td>
+                        <td>@item.PhoneNumber</td>
+                    </ItemTemplate>
+                </GenericTemplate>
+            }
         </table>
     </div>
 </div>
@@ -42,6 +51,11 @@
 @code {
     [Parameter]
     public List<TaskItem> _tasks { get; set; }
+    [Parameter]
+    public List<User> _users { get; set; }
+
+    [Parameter] public RenderFragment ListNull { get; set; }
+    [Parameter] public RenderFragment ListEmpty{ get; set; }
 
     //public EventCallback<List<TaskItem>> addNewTaskEvent += ;
 

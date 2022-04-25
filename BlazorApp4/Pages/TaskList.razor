@@ -2,9 +2,10 @@
 
 <div class="container-fluid">
 
-    <HeaderComponent PlaceHolder="Введите день" btn1Name="qqqq" btn2Name="sssss" btn3Name="dddd" btnStyleName="btn btn-dark" />
+    <HeaderComponent PlaceHolder="Введите день" btn1Name="Input" btn2Name="sssss" btn3Name="dddd" btnStyleName="btn btn-dark" />
 
     <TaskTable _tasks="list2" />
+    @*<TaskTable _users="list3" />*@
 
 
     <ActionsWithTasks actions="_isActive" isAdmin="_isAdmin" />
@@ -18,6 +19,7 @@
     private bool _isAdmin;
 
     private List<TaskItem> list2 = TaskListDB.GetItem("Monday").GetAwaiter().GetResult();
+    private List<User> list3 = User.GetList();
 
 
 
@@ -26,7 +28,7 @@
     //    list = await TaskListDB.GetItem("Thuesday");
     //}
 
-    private void AddNewTaskToList()
+        private void AddNewTaskToList()
     {
         //if (!string.IsNullOrEmpty(_newTask))
         //{

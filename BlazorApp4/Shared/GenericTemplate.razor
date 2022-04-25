@@ -1,0 +1,34 @@
+﻿@typeparam TItem
+
+@if (Items == null)
+{
+    <div class="row">@ListNull</div>
+}
+else
+{
+    if (Items.Count == 0)
+    {
+        <div class="row">@ListEmpty</div>
+    }
+    else
+    {
+        @foreach (var item in Items)
+        {
+            <tbody>
+                @ItemTemplate(item);
+            </tbody>
+
+        }
+    }
+
+}
+
+@code {
+
+    [Parameter] public RenderFragment ListNull { get; set; }
+    [Parameter] public RenderFragment ListEmpty { get; set; }
+    [Parameter] public RenderFragment<TItem> ItemTemplate { get; set; }
+
+    [Parameter] public List<TItem> Items { get; set; }
+
+}
