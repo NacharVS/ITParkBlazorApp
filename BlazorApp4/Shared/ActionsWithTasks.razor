@@ -24,6 +24,8 @@
 
 @code {
     [Parameter]
+    public List<TaskItem> _tasks { get; set; }
+    [Parameter]
     public bool actions { get; set; }
     [Parameter]
     public bool isAdmin { get; set; }
@@ -40,7 +42,7 @@
     {
         if (!string.IsNullOrEmpty(_day))
         {
-            //TaskListDB.AddItem(new TaskListDB(_tasks), _day);
+            TaskListDB.AddItem(new TaskListDB(_tasks), _day);
         }
         _day = string.Empty;
     }
