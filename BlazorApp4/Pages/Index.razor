@@ -1,5 +1,5 @@
 ﻿@page "/index"
-<RegComponent RegistrationIsActive="_trigger"></RegComponent>
+@*<RegComponent RegistrationIsActive="_trigger"></RegComponent>*@
 
 <button class="btn btn-primary" @onclick="Change">Regitration</button>
 
@@ -11,21 +11,21 @@
         _trigger = !_trigger;
     }
 
-    protected override void OnInitialized()
+    protected override void OnInitialized() // срабатывает при вызове компонента, до его отрисовки
     {
         Console.WriteLine("1. On Initialized()");
     }
 
-    protected override void OnParametersSet()
+    protected override void OnParametersSet() // срабатывает при изменении значений полей обернутых в атрибут Parameter
     {
         base.OnParametersSet();
     }
 
-    protected override void OnAfterRender(bool firstRender)
+    protected override void OnAfterRender(bool firstRender) // Срабатывает полсе полной отрисовки компонента
     {
         base.OnAfterRender(firstRender);
     }
-        protected override bool ShouldRender()
+        protected override bool ShouldRender() // запертить или разрешить ПЕРЕРИСОВККУ компонента
         {
             return base.ShouldRender();
         }

@@ -52,4 +52,8 @@
         //_tasks = TaskListDB.GetItem(_searchDay);
     }
 
+    protected override void OnParametersSet()
+    {
+        Console.WriteLine($"OnParametersSet() invoked. {_tasks.Count}");
+    }
 }
