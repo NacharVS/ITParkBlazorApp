@@ -1,0 +1,37 @@
+﻿<div class="row">
+    <div class="col col-auto">
+        <table class="table table-striped">
+            <thead class="table table-danger">
+                <tr>
+                    <th><input class="form-control" placeholder="@PlaceHolder" @bind-value="_searchDay" /></th>
+                    <th><button class="btn btn-dark">@btn1Name</button></th>
+                    <th><input type="checkbox" @bind-value="_isAdmin">Admin</th>
+                    <th><button class="@btnStyleName" @onclick="SetActive">@btn2Name</button></th>
+                    <th><button class="btn btn-dark">@btn3Name</button></th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+@code {
+    [Parameter]
+    public string PlaceHolder { get; set; }
+    [Parameter]
+    public string btn1Name { get; set; }
+    [Parameter]
+    public string btn2Name { get; set; }
+    [Parameter]
+    public string btn3Name { get; set; }
+
+    [Parameter]
+    public string btnStyleName { get; set; }
+    private bool _isActive;
+    private bool _isAdmin;
+
+    private void SetActive()
+    {
+        _isActive = !_isActive;
+    }
+
+    private static string _searchDay = string.Empty;
+}

@@ -1,5 +1,5 @@
 ﻿
-@page "/"
+@*@page "/"
 
 <link href="/css/styles.css" rel="stylesheet" type="text/css">
 
@@ -7,4 +7,19 @@
 
 @code{
    
+}*@
+
+@page "/index"
+<RegComponent RegistrationIsActive="_trigger"></RegComponent>
+
+<button class="btn btn-primary" @onclick="Change">Regitration</button>
+
+@code{
+    private bool _trigger = false;
+
+    private void Change()
+    {
+        _trigger = !_trigger;
+    }
+
 }

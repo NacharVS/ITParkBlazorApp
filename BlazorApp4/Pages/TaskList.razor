@@ -1,14 +1,70 @@
 ﻿@page "/tasklist"
 @using BlazorApp4.Data
 
+
 <div class="container-fluid">
+
+    <HeaderComponent PlaceHolder="Введите день" btn1Name="qqqq" btn2Name="sssss" btn3Name="dddd" btnStyleName="btn btn-dark"/>
+
+    <TaskTable _tasks="list2">
+        <ListNull>
+            <tr><td><span color="red">Loading</span></td></tr>
+        </ListNull>
+        <ListEmpty><tr><td><span color="red">No data</span></td></tr></ListEmpty>
+    </TaskTable> />
+
+</div>
+
+
+@code {
+
+    private bool _isActive;
+    private bool _isAdmin;
+
+    //private List<TaskItem> list2 = new List<TaskItem>();
+    private List<TaskItem> list2 = TaskListDB.GetItem("Monday").GetAwaiter().GetResult();
+
+
+    //protected override async Task OnInitializedAsync()
+    //{
+    //    list = await TaskListDB.GetItem("Thuesday");
+    //}
+
+    private void AddNewTaskToList()
+    {
+        //if (!string.IsNullOrEmpty(_newTask))
+        //{
+        //    _tasks.Add(new TaskItem(_newTask));
+        //    _newTask = ""; // string.Empty;
+        //}
+    }
+
+
+    private void AddToDB()
+    {
+        //if (!string.IsNullOrEmpty(_day))
+        //{
+        //    TaskListDB.AddItem(new TaskListDB(_tasks), _day);
+        //}
+        //_day = string.Empty;
+    }
+
+    //private void GetList()
+    //{
+    //    _tasks = TaskListDB.GetItem(_searchDay);
+    //}
+}
+
+
+
+@*<div class="container-fluid">
     <div class="row">
        <div class="col col-auto">
            <table class="table table-striped">
                <thead class="table table-danger">
                    <tr>
                        <th><input class="form-control" placeholder="Input day" @bind-value="_searchDay" /></th>
-                       <th><button class="btn btn-dark" @*@onclick="GetList"*@>Show</button></th>
+                       <th><button class="btn btn-dark" @onclick="GetList">Show</button></th>
                        <th><button class="btn btn-dark">Clear</button></th>
                    </tr>
                </thead>
@@ -112,3 +168,4 @@
         //_tasks = TaskListDB.GetListOfItems(_searchDay);
     }
 }
+*@

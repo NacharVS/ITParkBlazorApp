@@ -1,0 +1,33 @@
+﻿<h1>Registration/Authorisation</h1>
+
+<div class="modal-body">
+    <div class="row alert-danger"><h3>TableStart</h3></div>
+    @if (RegistrationIsActive && ChildFragment != null)
+    {
+        <table class="table table-responsive-md">
+            @ChildFragment
+            @if (_isRegComplete)
+            {
+                <tr>
+                    <td class="alert-danger"><h3>Registration succesfull done</h3></td>
+                </tr>
+            }
+        </table>
+    }
+    else
+    {
+        <div class="row alert-danger"><h3>No fragment to render</h3></div>
+    }
+</div>
+
+@code {
+    [Parameter]
+    public bool RegistrationIsActive { get; set; }
+
+    [Parameter] public RenderFragment ChildFragment { get; set; }
+
+    private bool _isRegComplete;
+
+
+}
+

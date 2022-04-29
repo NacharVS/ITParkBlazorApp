@@ -2,7 +2,38 @@
 
 <h3>Registration</h3>
 
-<h4>Login</h4>
+<RegComponent RegistrationIsActive="true">
+    <ChildFragment>
+        <ButtonGroup content="qqq"/>
+    </ChildFragment>
+    
+</RegComponent>
+
+
+@code {
+    private string _login;
+    private string Name;
+    private string Surname;
+    private string Phone;
+    private string qq = "sdadasdads";
+
+    List<string> qqq = new List<string>() { "qwe", "ewq", "ddd.", "dsadsd", "dsdsdsdsdsdsd" };
+
+    private void RegistrationD()
+    {
+        _login = "";
+    }
+
+    private void Registration1()
+    {
+
+    }
+
+
+}
+
+
+@*<h4>Login</h4>
 <input @bind-value="Login"/><br /><br />
 <h4>Name</h4>
 <input @bind-value="Name" /><br /><br />
@@ -29,3 +60,4 @@
 
 }
 
+*@
