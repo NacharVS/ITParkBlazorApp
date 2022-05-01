@@ -1,4 +1,6 @@
-﻿<div class="row">
+﻿@inject TaskService service
+
+<div class="row">
 
     <div class="modal-dialog">
         <h2 class="text-center">@_searchDay. </h2>
@@ -46,7 +48,7 @@
     </div>
 </div>
 
-<ActionsWithTasks actions="true" addNewTaskEvent="AddNewTaskToList" _tasks="_tasks" />
+<ActionsWithTasks actions="true" addNewTaskEvent="AddNewTaskToList" _tasks="service.taskItems" />
 
 
 @code {

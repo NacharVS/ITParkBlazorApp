@@ -1,4 +1,5 @@
 ﻿using BlazorApp4.Data;
+using BlazorApp4.Services;
 using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,8 @@ namespace BlazorApp4.Shared
 {
     public partial class ActionsWithTasks
     {
+        [Inject]
+        public TaskService service { get; set; }
         [Parameter]
         public List<TaskItem> _tasks { get; set; }
         [Parameter]

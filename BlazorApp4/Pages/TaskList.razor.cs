@@ -1,4 +1,6 @@
 ﻿using BlazorApp4.Data;
+using BlazorApp4.Services;
+using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,11 +10,17 @@ namespace BlazorApp4.Pages
 {
     public partial class TaskList
     {
-
+        [Inject]
+        public  TaskService service { get; set; }
         private bool _isActive;
         private bool _isAdmin;
 
-        private List<TaskItem> list2 = new List<TaskItem>();/*TaskListDB.GetItem("Thuesday").GetAwaiter().GetResult();*/
+        private List<TaskItem> list2;/*TaskListDB.GetItem("Thuesday").GetAwaiter().GetResult();*/
+
+        protected override void OnInitialized()
+        {
+            list2 = service.taskItems;
+        }
 
 
 

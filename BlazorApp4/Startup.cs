@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using BlazorApp4.Data;
+using BlazorApp4.Services;
 
 namespace BlazorApp4
 {
@@ -31,7 +32,7 @@ namespace BlazorApp4
             services.AddSingleton<WeatherForecastService>();
             services.AddTransient<TransientService>(); // При запросе к сервису создается новый экземпляр сервиса, и каждый новый запрос создает новый экземпляр
             services.AddSingleton<SingletonService>(); // При запросе к сервису создается новый экземпляр сервиса, и каждый новый запрос идёт к одному и тому же  экземпляру
-
+            services.AddSingleton<TaskService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
