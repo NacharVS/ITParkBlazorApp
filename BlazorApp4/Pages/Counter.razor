@@ -1,5 +1,8 @@
 ﻿@page "/counter"
 
+@inject SingletonService singleton
+@inject TransientService trancient
+
 <h6>Counter</h6>
 
 @for (int i = 0; i < 10; i++)
@@ -12,25 +15,14 @@
 @*<input @bind-value="currentCount"/>*@
 <ButtonGroup content="list"></ButtonGroup>
 
-<ul class="nav flex-column">
-    <li class="nav-item px-3">
-        1111
-    </li>
-    <li class="nav-item px-3">
-        22222
-    </li>
-    <li class="nav-item px-3">
-        3333
-
-
-    </li>
-    <li class="nav-item px-3">
-        4444
-    </li>
-    <li class="nav-item px-3">
-        5555
-    </li>
-</ul>
+<div class="row mt-3">
+    <div class="col-6 text-center alert alert-primary">
+        SingletonCount @singleton.Value
+    </div>
+    <div class="col-6 text-center alert alert-danger">
+        TransientCount @trancient.Value
+    </div>
+</div>
 
 
 
@@ -42,6 +34,9 @@
     private void IncrementCount()
     {
         currentCount++;
+
+        trancient.Value = currentCount;
+        singleton.Value = currentCount;
     }
 
     //protected override void OnAfterRender(bool firstRender)
@@ -49,9 +44,9 @@
     //    Console.WriteLine(firstRender);
     //}
 
-    protected override bool ShouldRender()
-    {
-        Console.WriteLine("Should Render");
-        return false;
-    }
+    //protected override bool ShouldRender()
+    //{
+    //    Console.WriteLine("Should Render");
+    //    return false;
+    //}
 }

@@ -1,7 +1,15 @@
 ﻿@page "/index"
+
+@inject SingletonService singleton
 @*<RegComponent RegistrationIsActive="_trigger"></RegComponent>*@
 
 <button class="btn btn-primary" @onclick="Change">Regitration</button>
+
+<div class="row mt-3">
+    <div class="col-6 text-center alert alert-primary">
+        SingletonCount @singleton.Value
+    </div>
+</div>
 
 @code{
     private bool _trigger = false;
@@ -25,10 +33,10 @@
     {
         base.OnAfterRender(firstRender);
     }
-        protected override bool ShouldRender() // запертить или разрешить ПЕРЕРИСОВККУ компонента
-        {
-            return base.ShouldRender();
-        }
+    protected override bool ShouldRender() // запертить или разрешить ПЕРЕРИСОВККУ компонента
+    {
+        return base.ShouldRender();
+    }
 
 
 }
