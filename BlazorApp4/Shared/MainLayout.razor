@@ -6,6 +6,11 @@
 
 <div class="main">
     <div class="top-row px-4">
+        <div class="col">
+            @DateTime.Now;
+            <br>
+            <a class="btn btn-primary" href="counter">@Login</a>
+        </div>
         <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
     </div>
 
@@ -13,3 +18,6 @@
         @Body
     </div>
 </div>
+@code{
+    public string Login = User.GetList().First().Login;
+}
