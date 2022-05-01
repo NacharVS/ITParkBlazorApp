@@ -3,7 +3,7 @@
 <div class="container-fluid">
 
     <HeaderComponent PlaceHolder="Введите день" btn1Name="qqqq" btn2Name="sssss" btn3Name="dddd" btnStyleName="btn btn-dark"/>
-
+    <div>@_isActive</div>
     <TaskTable _tasks="list2">
         <ListNull>
 
@@ -15,42 +15,3 @@
 
 </div>
 
-
-@code {
-
-    private bool _isActive;
-    private bool _isAdmin;
-
-    private List<TaskItem> list2 = new List<TaskItem>();/*TaskListDB.GetItem("Thuesday").GetAwaiter().GetResult();*/
-
-
-
-    //protected override async Task OnInitializedAsync()
-    //{
-    //    list = await TaskListDB.GetItem("Thuesday");
-    //}
-
-    private void AddNewTaskToList()
-    {
-        //if (!string.IsNullOrEmpty(_newTask))
-        //{
-        //    _tasks.Add(new TaskItem(_newTask));
-        //    _newTask = ""; // string.Empty;
-        //}
-    }
-
-
-    private void AddToDB()
-    {
-        //if (!string.IsNullOrEmpty(_day))
-        //{
-        //    TaskListDB.AddItem(new TaskListDB(_tasks), _day);
-        //}
-        //_day = string.Empty;
-    }
-
-    //private void GetList()
-    //{
-    //    _tasks = TaskListDB.GetItem(_searchDay);
-    //}
-}

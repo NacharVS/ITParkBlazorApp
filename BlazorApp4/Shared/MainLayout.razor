@@ -6,8 +6,17 @@
 
 
 <div class="main">
-    <div class="top-row px-4">
-        <NavMenu />
+    <div class="top-row">
+        <div class="col text-right">
+            sdfsdff
+        </div>
+        <div class="col text-center">
+            <a class="btn btn secondary" href="counter">@Login</a>
+        </div>
+        <div class="col text-center">
+            <a href="https://docs.microsoft.com/aspnet/" target="_top">About</a>
+        </div>
+
     </div>
 
     <div class="content px-4">
@@ -15,6 +24,11 @@
     </div>
 </div>
 
+
+
 @code{
+    public string Login = User.GetList()[0].Login;
+
+   
 
 }
