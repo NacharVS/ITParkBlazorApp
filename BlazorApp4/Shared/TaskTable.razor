@@ -1,0 +1,70 @@
+﻿<div class="row">
+
+    <div class="modal-dialog">
+        <h2 class="text-center">@_searchDay. </h2>
+        <table class="table table-responsive-md">
+            <thead class="table-dark">
+                <tr>
+                    <th>Mission</th>
+                    <th>In Progress</th>
+                    <th>Is Done</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <GenericTemplate Items="_tasks">
+                <ItemTemplate Context="item">
+                    <td>@item.Name</td>
+                    <td><input type="checkbox" @bind="item.InProgress" /></td>
+                    <td><input type="checkbox" @bind="item.IsDone" /></td>
+                    <td><button class="btn btn-danger ">Delete Task</button></td>
+                </ItemTemplate>
+            </GenericTemplate>
+            @*@if (_tasks == null)
+            {
+                @ListNull
+            }
+            else
+            {
+                if (_tasks.Count == 0)
+                {
+                    @ListEmpty
+                }
+                else
+                    @foreach (var item in _tasks)
+                    {
+                        <tbody>
+                            <tr>
+                                <td>@item.Name</td>
+                                <td><input type="checkbox" @bind="item.InProgress" /></td>
+                                <td><input type="checkbox" @bind="item.IsDone" /></td>
+                                <td><button class="btn btn-danger " >Delete Task</button></td>
+                            </tr>
+                        </tbody>
+                    }
+                }*@
+        </table>
+    </div>
+</div>
+
+<ActionsWithTasks actions="true" addNewTaskEvent="AddNewTaskToList" _tasks="_tasks" />
+
+
+@code {
+    [Parameter]
+    public List<TaskItem> _tasks { get; set; }
+
+    private static string _searchDay = string.Empty;
+
+    [Parameter] public RenderFragment ListNull { get; set; }
+    [Parameter] public RenderFragment ListEmpty { get; set; }
+
+    private void AddNewTaskToList(string buff)
+    {
+
+        _tasks.Add(new TaskItem(buff));
+        StateHasChanged();
+        /*_newTask = ""; */// string.Empty;
+
+    }
+
+}

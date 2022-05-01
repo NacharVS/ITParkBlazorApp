@@ -43,4 +43,15 @@
     {
         currentCount++;
     }
+
+    //protected override void OnAfterRender(bool firstRender)
+    //{
+    //    Console.WriteLine(firstRender);
+    //}
+
+    protected override bool ShouldRender()
+    {
+        Console.WriteLine("Should Render");
+        return false;
+    }
 }

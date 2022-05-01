@@ -4,10 +4,14 @@
 
     <HeaderComponent PlaceHolder="Введите день" btn1Name="qqqq" btn2Name="sssss" btn3Name="dddd" btnStyleName="btn btn-dark"/>
 
-    <TaskTable _tasks="list2" />
+    <TaskTable _tasks="list2">
+        <ListNull>
 
+        </ListNull>
+        <ListEmpty>
 
-   
+        </ListEmpty>
+    </TaskTable>
 
 </div>
 
@@ -17,7 +21,7 @@
     private bool _isActive;
     private bool _isAdmin;
 
-    private List<TaskItem> list2 = TaskListDB.GetItem("Monday").GetAwaiter().GetResult();
+    private List<TaskItem> list2 = new List<TaskItem>();/*TaskListDB.GetItem("Thuesday").GetAwaiter().GetResult();*/
 
 
 
