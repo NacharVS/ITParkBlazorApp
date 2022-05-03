@@ -1,83 +1,72 @@
-﻿<div class="row">
+﻿@inject TaskService service
 
-    <div class="col">
+<div class="row">
+
+    <div class="modal-dialog">
         <h2 class="text-center">@_searchDay. </h2>
-        <table class="table table-striped">
+        <table class="table table-responsive-md">
             <thead class="table-dark">
-                @if (_tasks != null)
+                <tr>
+                    <th>Mission</th>
+                    <th>In Progress</th>
+                    <th>Is Done</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <GenericTemplate Items="_tasks">
+                <ItemTemplate Context="item">
+                    <td>@item.Name</td>
+                    <td><input type="checkbox" @bind="item.InProgress" /></td>
+                    <td><input type="checkbox" @bind="item.IsDone" /></td>
+                    <td><button class="btn btn-danger ">Delete Task</button></td>
+                </ItemTemplate>
+            </GenericTemplate>
+            @*@if (_tasks == null)
                 {
-                    <tr>
-                        <th>Mission</th>
-                        <th>In Progress</th>
-                        <th>Is Done</th>
-                        <th>Actions</th>
-                    </tr>
+                    @ListNull
                 }
                 else
                 {
-                    <tr>
-                        <th>Name</th>
-                        <th>Surname</th>
-                        <th>Phone</th>
-                    </tr>
-                }
-            </thead>
-            @if (_tasks != null)
-            {
-                <GenericTemplate Items="_tasks">
-                    <ItemTemplate Context="item">
-                        <td>@item.Name</td>
-                        <td><input type="checkbox" @bind="item.InProgress" /></td>
-                        <td><input type="checkbox" @bind="item.IsDone" /></td>
-                        <td><button class="btn btn-danger" @onclick="(() => DeleteTask(item))">Delete Task</button></td>
-                    </ItemTemplate>
-                </GenericTemplate>
-            }
-            else
-            {
-                <GenericTemplate Items="_users">
-                    <ItemTemplate Context="item">
-                        <td>@item.Name</td>
-                        <td>@item.SurName</td>
-                        <td>@item.PhoneNumber</td>
-                    </ItemTemplate>
-                </GenericTemplate>
-            }
+                    if (_tasks.Count == 0)
+                    {
+                        @ListEmpty
+                    }
+                    else
+                        @foreach (var item in _tasks)
+                        {
+                            <tbody>
+                                <tr>
+                                    <td>@item.Name</td>
+                                    <td><input type="checkbox" @bind="item.InProgress" /></td>
+                                    <td><input type="checkbox" @bind="item.IsDone" /></td>
+                                    <td><button class="btn btn-danger " >Delete Task</button></td>
+                                </tr>
+                            </tbody>
+                        }
+                    }*@
         </table>
     </div>
 </div>
+
+<ActionsWithTasks actions="true" addNewTaskEvent="AddNewTaskToList" _tasks="service.taskItems" />
 
 
 @code {
     [Parameter]
     public List<TaskItem> _tasks { get; set; }
-    [Parameter]
-    public List<User> _users { get; set; }
-
-    [Parameter] public RenderFragment ListNull { get; set; }
-    [Parameter] public RenderFragment ListEmpty{ get; set; }
-
-    //public EventCallback<List<TaskItem>> addNewTaskEvent += ;
 
     private static string _searchDay = string.Empty;
 
-    //protected override async Task OnInitializedAsync()
-    //{
-    //    //await Task.Delay(2000);
-    //    _tasks = await TaskListDB.GetItem("Monday");
-    //}
+    [Parameter] public RenderFragment ListNull { get; set; }
+    [Parameter] public RenderFragment ListEmpty { get; set; }
 
-
-    private void AddNewTaskToList()
+    private void AddNewTaskToList(string buff)
     {
 
-        _tasks.Add(new TaskItem("Take breakfast"));
+        _tasks.Add(new TaskItem(buff));
+        StateHasChanged();
         /*_newTask = ""; */// string.Empty;
 
     }
 
-    private void DeleteTask(TaskItem item)
-    {
-        _tasks.Remove(item);
-    }
 }
