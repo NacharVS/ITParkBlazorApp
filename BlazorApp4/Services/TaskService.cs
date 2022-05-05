@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BlazorApp4.Services
 {
-    public class TaskService : ComponentBase
+    public class TaskService
     {
         public TaskService()
         {
@@ -43,6 +43,22 @@ namespace BlazorApp4.Services
             else
             {
                 return null;
+            }
+
+        }
+
+        public void AddItemToDB(string day)
+        {
+            var client = new MongoClient("mongodb://localhost");
+            var database = client.GetDatabase("TaskList");
+            var collection = database.GetCollection<TaskListDB>(day);
+            if (database.ListCollectionNames().ToList().Exists(x => x == day))
+            {
+                collection.ReplaceOne(x => true, new TaskListDB(taskItems));
+            }
+            else
+            {
+                collection.InsertOne(new TaskListDB(taskItems));
             }
 
         }

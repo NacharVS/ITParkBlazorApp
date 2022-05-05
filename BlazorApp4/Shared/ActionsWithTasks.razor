@@ -11,7 +11,7 @@
         <button class="btn btn-outline-dark" @onclick="AddTaskRerender">Add New Task</button>
     </div>
     <div class="col col-auto">
-        <button class="btn btn-primary" @onclick="AddToDB">Save Task List</button>
+        <button class="btn btn-primary" @onclick="(() => service.AddItemToDB(_day))">Save Task List</button>
     </div>
     @if (isAdmin)
     {
@@ -21,4 +21,5 @@
     }
 </div>
 }
+
 
