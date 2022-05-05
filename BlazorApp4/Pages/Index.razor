@@ -1,6 +1,8 @@
 ﻿@page "/index"
-
+@inject IJSRuntime runtimeObject
 @inject SingletonService qqq
+
+
 @*<RegComponent RegistrationIsActive="_trigger"></RegComponent>*@
 
 <button class="btn btn-primary" @onclick="Change">@qqq.Value</button>
@@ -9,6 +11,9 @@
 
 @code{
     private bool _trigger = false;
+    
+    
+    
 
     private void Change()
     {
@@ -17,7 +22,7 @@
 
     protected override void OnInitialized() // срабатывает при вызове компонента, до его отрисовки
     {
-        Console.WriteLine("1. On Initialized()");
+        
     }
 
     protected override void OnParametersSet() // срабатывает при изменении значений полей обернутых в атрибут Parameter
