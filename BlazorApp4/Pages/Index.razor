@@ -4,16 +4,35 @@
 
 
 @*<RegComponent RegistrationIsActive="_trigger"></RegComponent>*@
+<input @bind-value="someString" />
+<input @bind-value="keyValue" />
+<button class="btn btn-primary" @onclick="SaveAsync">@qqq.Value</button>
 
-<button class="btn btn-primary" @onclick="Change">@qqq.Value</button>
+<div class="row alert-danger text-black-50">@someString2</div>
+<button class="btn btn-primary" @onclick="LocalStorageLoad">Load</button>
 
 
 
 @code{
     private bool _trigger = false;
-    
-    
-    
+    LocalStorageService service;
+
+    string keyValue = string.Empty;
+    string someString = string.Empty;
+    string someString2 = string.Empty;
+
+    public async void SaveAsync()
+    {
+        await service.SetStringAsync(keyValue, someString);
+    }
+
+    public async void LocalStorageLoad()
+    {
+        someString2 = await service.GetStringAsync(keyValue);
+        StateHasChanged();
+
+    }
+
 
     private void Change()
     {
@@ -22,7 +41,7 @@
 
     protected override void OnInitialized() // срабатывает при вызове компонента, до его отрисовки
     {
-        
+        service = new LocalStorageService(runtimeObject);
     }
 
     protected override void OnParametersSet() // срабатывает при изменении значений полей обернутых в атрибут Parameter

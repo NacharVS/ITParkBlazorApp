@@ -2,7 +2,7 @@ using Microsoft.JSInterop;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace CancerTestCore.Infrastructure
+namespace BlazorApp4.Data
 {
     public class LocalStorageService : ILocalStorageService
     {

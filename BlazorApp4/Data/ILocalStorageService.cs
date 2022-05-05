@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace CancerTestCore.Infrastructure
+namespace BlazorApp4.Data
 {
     public interface ILocalStorageService
     {
