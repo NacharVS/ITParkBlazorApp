@@ -8,7 +8,7 @@
         <input class="form-control" placeholder="Input planning day" @bind-value="_day" />
     </div>
     <div class="col col-auto">
-        <button class="btn btn-outline-dark" @onclick="(()=> addNewTaskEvent.InvokeAsync(_newTask))">Add New Task</button>
+        <button class="btn btn-outline-dark" @onclick="AddTaskRerender">Add New Task</button>
     </div>
     <div class="col col-auto">
         <button class="btn btn-primary" @onclick="AddToDB">Save Task List</button>

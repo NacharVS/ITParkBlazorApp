@@ -48,7 +48,7 @@
     </div>
 </div>
 
-<ActionsWithTasks actions="true" addNewTaskEvent="AddNewTaskToList" _tasks="service.taskItems" />
+<ActionsWithTasks actions="true" _tasks="service.taskItems" />
 
 
 @code {
@@ -60,13 +60,13 @@
     [Parameter] public RenderFragment ListNull { get; set; }
     [Parameter] public RenderFragment ListEmpty { get; set; }
 
-    private void AddNewTaskToList(string buff)
-    {
+    //private void AddNewTaskToList(string buff)
+    //{
 
-        _tasks.Add(new TaskItem(buff));
-        StateHasChanged();
-        /*_newTask = ""; */// string.Empty;
+    //    _tasks.Add(new TaskItem(buff));
+    //    StateHasChanged();
+    //    /*_newTask = ""; */// string.Empty;
 
-    }
+    //}
 
 }

@@ -1,4 +1,5 @@
 ﻿using BlazorApp4.Data;
+using Microsoft.AspNetCore.Components;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
@@ -7,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace BlazorApp4.Services
 {
-    public class TaskService
+    public class TaskService : ComponentBase
     {
         public TaskService()
         {
-            taskItems = GetItem("Thuesday");
+            taskItems = GetItem("MOnday");
         }
 
         public List<TaskItem> taskItems { get; set; }
@@ -44,6 +45,11 @@ namespace BlazorApp4.Services
                 return null;
             }
 
+        }
+
+        public void AddNewTask(string newTask)
+        {
+            taskItems.Add(new TaskItem(newTask));
         }
     }
 }

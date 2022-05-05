@@ -23,8 +23,7 @@ namespace BlazorApp4.Shared
         private static string _searchDay = string.Empty;
 
         private string _newTask { get; set; }
-        [Parameter]
-        public EventCallback<string> addNewTaskEvent { get; set; }
+
 
 
         private void AddToDB()
@@ -39,11 +38,14 @@ namespace BlazorApp4.Shared
         private void GetList()
         {
             //_tasks = TaskListDB.GetItem(_searchDay);
+            
         }
 
-        protected override void OnParametersSet()
+        private void AddTaskRerender()
         {
-            Console.WriteLine($"OnParametersSet() invoked. {_tasks.Count}");
+            service.AddNewTask(_newTask);
+            StateHasChanged();
         }
+
     }
 }

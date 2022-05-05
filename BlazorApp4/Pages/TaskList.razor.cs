@@ -19,7 +19,7 @@ namespace BlazorApp4.Pages
 
         protected override void OnInitialized()
         {
-            list2 = service.taskItems;
+            list2 = service.taskItems;            
         }
 
 
