@@ -9,11 +9,26 @@ namespace BlazorApp4.Data
     {
         public string Color { get; set; } = "green";
         public string Background { get; set; } = "row alert-dark";
+        public string ButtonStyle { get; set; } = "btn btn-primary";
+        private bool IsDark = true;
 
         public void ChangeTheme()
         {
-            Color = "red";
-            Background = "row alert-light";
+            
+            if (!IsDark)
+            {
+                Color = "green";
+                Background = "row alert-dark";
+                ButtonStyle = "btn btn-primary";
+
+            }
+            else
+            {
+                Color = "red";
+                Background = "row alert-ligt";
+                ButtonStyle = "btn btn-danger";
+            }
+            IsDark = !IsDark;
         }
     }
 }
