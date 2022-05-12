@@ -2,8 +2,11 @@
 
 @inject SingletonService singleton
 @inject TransientService trancient
+<div class="@styles.Background">
+    <div class="col"><h2 style="color:@styles.Color">Counter</h2></div>
+    <div class="col"><button class="btn btn-primary" @onclick="styles.ChangeTheme">Switch Dark Theme</button></div>
+</div>
 
-<h6 style="color:@MyProperty">Counter</h6>
 
 @for (int i = 0; i < 10; i++)
 {
@@ -30,7 +33,7 @@
     private int currentCount = 0;
 
     private List<string> list = new List<string>() { "Add", "Edit", "Remove"};
-    [CascadingParameter(Name = "SomeText")] public string MyProperty { get; set; }
+    [CascadingParameter] public ApplicationStyles styles { get; set; } = new ApplicationStyles();
 
     private void IncrementCount()
     {

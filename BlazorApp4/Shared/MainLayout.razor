@@ -21,12 +21,11 @@
     </div>
 
     <div class="content px-4">
-        <CascadingValue Value="SomeText" Name="SomeText">
-            <CascadingValue Value="AnotherText" Name="AnotherText">
+        <CascadingValue Value="styles">
                 @Body
-            </CascadingValue>
-
         </CascadingValue>
+
+
      
     </div>
 </div>
@@ -35,8 +34,7 @@
 
 @code{
     public string Login = User.GetList()[0].Login;
-    public string SomeText = "red";
-    public string AnotherText = "green";
+    public ApplicationStyles styles = new ApplicationStyles();
 
 
 }
