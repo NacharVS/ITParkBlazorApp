@@ -49,5 +49,16 @@ namespace BlazorApp4.Data
             
             return collection.Find(x => true).ToList();
         }
+
+        public static User Authorization(string name, string password)
+        {
+            var client = new MongoClient("mongodb://localhost");
+            var database = client.GetDatabase("Blazor");
+            var collection = database.GetCollection<User>("Users");
+
+           var item = collection.Find(x => x.Name == name && x.PhoneNumber == password).FirstOrDefault();
+            // Передаем в метод троки их тега input и если найдено соответсвие по 2м параметрам, метод вернет объект, в противном случае вернет null.
+            return item;
+        }
     }
 }
