@@ -1,6 +1,7 @@
 ﻿@page "/index"
 @inject IJSRuntime runtimeObject
 @inject SingletonService qqq
+@inject NavigationManager navigate
 
 <h1 style="color:@MyProperty">Main window</h1>
 <h2 style="color:@MyProperty1">Sub header</h2>
@@ -11,6 +12,8 @@
 
 <div class="row alert-danger text-black-50">@someString2</div>
 <button class="btn btn-primary" @onclick="LocalStorageLoad">@MyProperty</button>
+<br />
+<button class="btn btn-primary" @onclick="(()=> navigate.NavigateTo(navigateCounter))">Go to tasks</button>
 
 
 
@@ -22,6 +25,7 @@
     string keyValue = string.Empty;
     string someString = string.Empty;
     string someString2 = string.Empty;
+    string navigateCounter = "/tasklist";
 
     public async void SaveAsync()
     {
