@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace BlazorApp4.Pages
 {
-    public class Counter
+    public partial class Counter
     {
     }
 }

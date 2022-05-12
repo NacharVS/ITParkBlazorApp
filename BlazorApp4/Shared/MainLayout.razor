@@ -1,4 +1,5 @@
 ﻿@inherits LayoutComponentBase
+@*@inject TaskService service*@
 
 <div class="sidebar">
     <NavMenu />
@@ -20,7 +21,13 @@
     </div>
 
     <div class="content px-4">
-        @Body
+        <CascadingValue Value="SomeText" Name="SomeText">
+            <CascadingValue Value="AnotherText" Name="AnotherText">
+                @Body
+            </CascadingValue>
+
+        </CascadingValue>
+     
     </div>
 </div>
 
@@ -28,7 +35,8 @@
 
 @code{
     public string Login = User.GetList()[0].Login;
+    public string SomeText = "red";
+    public string AnotherText = "green";
 
-   
 
 }

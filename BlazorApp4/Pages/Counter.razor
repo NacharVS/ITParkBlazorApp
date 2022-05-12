@@ -3,7 +3,7 @@
 @inject SingletonService singleton
 @inject TransientService trancient
 
-<h6>Counter</h6>
+<h6 style="color:@MyProperty">Counter</h6>
 
 @for (int i = 0; i < 10; i++)
 {
@@ -30,7 +30,7 @@
     private int currentCount = 0;
 
     private List<string> list = new List<string>() { "Add", "Edit", "Remove"};
-
+    [CascadingParameter(Name = "SomeText")] public string MyProperty { get; set; }
 
     private void IncrementCount()
     {

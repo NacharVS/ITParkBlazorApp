@@ -12,7 +12,7 @@ namespace BlazorApp4.Services
     {
         public TaskService()
         {
-            taskItems = GetItem("MOnday");
+            taskItems = GetItem("Tuesday");
         }
 
         public List<TaskItem> taskItems { get; set; }
