@@ -1,0 +1,44 @@
+﻿
+<table class="table table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>Name</th>
+            <th>Surname</th>
+            <th>Phone</th>
+        </tr>
+        @*@if (true)
+                {
+                    <tr>
+                        <th>Mission</th>
+                        <th>In Progress</th>
+                        <th>Is Done</th>
+                        <th>Actions</th>
+                    </tr>
+                }
+                else
+                {
+                    <tr>
+                        <th>Name</th>
+                        <th>Surname</th>
+                        <th>Phone</th>
+                    </tr>
+                }
+
+            @if (true)
+            {
+
+            }
+            else
+            {
+
+            }*@
+    </thead>
+</table>
+
+
+
+@code {
+    [Parameter] public List<ProjectTable> projectTable { get; set; }
+    [Parameter]
+    public bool ProjectIsActive { get; set; }
+}

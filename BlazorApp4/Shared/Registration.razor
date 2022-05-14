@@ -1,0 +1,79 @@
+﻿<h3>Registration</h3>
+<div class="modal-body">
+    <table class="table table-responsive-md">
+        <thead class="table-dark">
+            <tr>
+                <th><h2>Authorization</h2></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><input class="form-control" placeholder="Login" @bind-value="_login" /></td>
+            </tr>
+            <tr>
+                <td><input class="form-control" placeholder="Surname" @bind-value="_surName" /></td>
+            </tr>
+            <tr>
+                <td><input class="form-control" placeholder="Profession" @bind-value="_proffession" /></td>
+            </tr>
+            <tr>
+                <td><input class="form-control" placeholder="E-mail" @bind-value="_email" /></td>
+            </tr>
+            <tr>
+                <td><input class="form-control" placeholder="Phone Number" @bind-value="_phoneNumber" /></td>
+            </tr>
+            <tr>
+                <td><input class="form-control" type="password" placeholder="Password" @bind-value="_password" /></td>
+            </tr>
+            <tr>
+                <th>
+                    <button class="btn btn-dark" @onclick="NewRegistration">New registration</button>
+                </th>
+            </tr>
+            @if (_isComplete)
+            {
+                <tr>
+                    <td class="alert-danger"><h3>Registration succesfull done!</h3></td>
+                </tr>
+            } @if (_isNotComplete)
+            {
+                <tr>
+                    <td class="alert-danger"><h3>Please enter all data!</h3></td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+
+@code {
+    private string _login;
+    private string _surName;
+    private string _proffession;
+    private string _email;
+    private string _phoneNumber;
+    private string _password;
+
+    private bool _isComplete;
+    private bool _isNotComplete;
+
+    private void NewRegistration()
+    {
+        if (_login == null && _surName == null && _email == null && _phoneNumber == null && _password == null)
+        {
+            _isNotComplete = true;
+            _isComplete = false;
+        }
+        else
+        {
+            _isComplete = true;
+            _isNotComplete = false;
+            MongoDataBase.AddUser(_login, _surName, _proffession, _email, _phoneNumber, _password);
+        }
+
+    }
+
+
+
+
+}

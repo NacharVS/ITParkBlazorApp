@@ -1,0 +1,122 @@
+﻿@page "/"
+@if (!AuthorizationIsActive)
+{
+    <div class="modal-body">
+        <table class="table table-responsive-md">
+            <thead class="table-dark">
+                <tr>
+                    <th><h2>Authorization</h2></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input class="form-control" placeholder="Login" @bind-value="_login" /></td>
+                </tr>
+                <tr>
+                    <td><input class="form-control" type="password" placeholder="Password" @bind-value="_password" /></td>
+                </tr>
+                <tr>
+                    <th>
+                        <button class="btn btn-dark" @onclick="AuthorizationNow">Log in</button>
+                        <button class="btn btn-dark" @onclick="NewAuthorization">New registration</button>
+                    </th>
+                </tr>
+                @if (_isComplete)
+                {
+                    <tr>
+                        <td class="alert-danger"><h3>Authorization succesfull done!</h3></td>
+                    </tr>
+                }
+                @if (_adminMode)
+                {
+                    <tr>
+                        <td class="alert-danger"><h3>You are logged in as an administrator.</h3></td>
+                    </tr>
+                }
+                @if (_isNotComplete)
+                {
+                    <tr>
+                        <td class="alert-danger"><h3>Authorization failed!</h3></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+
+@if (LogInIsActive)
+{
+    <ProjectTable></ProjectTable>
+}
+@if (RegistrationIsActive)
+{
+    <Registration></Registration>
+}
+@if (AdminIsActive)
+{
+    <Admin></Admin>
+}
+
+@code {
+    [Parameter]
+    public bool AuthorizationIsActive { get; set; }
+    [Parameter]
+    public bool RegistrationIsActive { get; set; }
+    [Parameter]
+    public bool LogInIsActive { get; set; }
+    [Parameter]
+    public bool AdminIsActive { get; set; }
+
+
+    private bool _isComplete;
+    private bool _isNotComplete;
+    private bool _adminMode;
+
+
+    //[Parameter]
+    //public bool UserMode { get; set; }
+
+    private static string _login;
+    private static string _password;
+
+
+    private void LogIn()
+    {
+        _isComplete = !_isComplete;
+    }
+
+    private void AuthorizationNow()
+    {
+        if (_login == "Admin" && _password == "admin")
+        {
+            _isComplete = true;
+            _adminMode = true;
+            _isNotComplete = false;
+            AuthorizationIsActive = !AuthorizationIsActive;
+            AdminIsActive = !AdminIsActive;
+        }
+        else
+        if (_login == MongoDataBase.FindUserName(_login) && _password == MongoDataBase.FindUserPassword(_password))
+        {
+            _isComplete = true;
+            _isNotComplete = false;
+            AuthorizationIsActive = !AuthorizationIsActive;
+            LogInIsActive = !LogInIsActive;
+        }
+        else
+        {
+            _isNotComplete = true;
+            _isComplete = false;
+        }
+    }
+    private void AdminClick()
+    {
+
+    }
+    private void NewAuthorization()
+    {
+        AuthorizationIsActive = !AuthorizationIsActive;
+        RegistrationIsActive = !RegistrationIsActive;
+    }
+
+}
