@@ -1,7 +1,7 @@
 ﻿@page "/regist"
-<FileUpload></FileUpload>
 
-
+<input type="checkbox" @bind="flag"/>
+@if (flag) { <FileUpload></FileUpload> }
 
 
 @code {
@@ -9,7 +9,7 @@
     private string Name;
     private string Surname;
     private string Phone;
-    private string qq = "sdadasdads";
+    private bool flag;
 
     List<string> qqq = new List<string>() { "qwe", "ewq", "ddd.", "dsadsd", "dsdsdsdsdsdsd" };
 
