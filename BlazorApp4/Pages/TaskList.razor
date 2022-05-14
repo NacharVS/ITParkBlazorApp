@@ -2,7 +2,7 @@
 
 <div class="container-fluid">
 
-    <HeaderComponent PlaceHolder="Введите день" btn1Name="qqqq" btn2Name="sssss" btn3Name="dddd" btnStyleName="btn btn-dark"/>
+    <HeaderComponent PlaceHolder="Введите день" btn1Name="qqqq" btn2Name="sssss" btn3Name="dddd" btnStyleName="btn btn-dark" />
     <div>@_isActive</div>
     <TaskTable _tasks="list2">
         <ListNull>
@@ -12,6 +12,15 @@
 
         </ListEmpty>
     </TaskTable>
-
+    <input type="checkbox" @bind="_check" />
+    <button class="btn btn-primary" @onclick="Checking">Check</button>
+    @if (_check)
+    {
+        <div class="row alert-danger text-center"> passwords not same</div>
+    }
+    else
+    {
+        <div class="row alert-info text-center"> passwords same</div>
+    }
 </div>
 

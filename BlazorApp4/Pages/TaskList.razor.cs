@@ -15,12 +15,24 @@ namespace BlazorApp4.Pages
         private bool _isActive;
         private bool _isAdmin;
 
+        private bool _check;
+
         private List<TaskItem> list2;/*TaskListDB.GetItem("Thuesday").GetAwaiter().GetResult();*/
 
         protected override void OnInitialized()
         {
             list2 = service.taskItems;            
         }
+
+        private void Checking()
+        {
+            if (_check)
+                _check = !_check;
+            else
+                _check = !_check;
+        }
+
+
 
 
 

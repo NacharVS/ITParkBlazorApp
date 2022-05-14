@@ -72,6 +72,8 @@ else
                 img = new byte[stream.Length];
                 await stream.ReadAsync(img);
 
+                isLoading = false;
+                ImgToDb.AddToDB(new ImgToDb("RandomName", img));
 
             }
 
@@ -81,6 +83,5 @@ else
             }
         }
 
-        isLoading = false;
     }
 }
