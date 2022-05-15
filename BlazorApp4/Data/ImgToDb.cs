@@ -1,9 +1,11 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Driver;
+using System.Drawing;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace BlazorApp4.Data
 {
@@ -26,6 +28,12 @@ namespace BlazorApp4.Data
             var collection = database.GetCollection<ImgToDb>("Image");
             collection.InsertOne(img);
         }
+
+        //public Bitmap GetImage()
+        //{
+        //    //MemoryStream stream = new MemoryStream(img);
+        //    //return (Bitmap)Image.FromStream(stream);
+        //}
 
     }
 }

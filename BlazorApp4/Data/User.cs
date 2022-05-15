@@ -22,12 +22,17 @@ namespace BlazorApp4.Data
             SurName = surname;
             PhoneNumber = phoneNumber;
         }
+
+        public User()
+        {
+        }
+
         public ObjectId _id { get; set; }
         public string Login { get; set; }
         public string Name { get; set; }
         public string SurName { get; set; }
         public string PhoneNumber { get; set; }
-        
+        public byte[] img;
 
 
         public static List<User> GetList()
