@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace BlazorApp4.Pages
 {
@@ -19,10 +19,7 @@ namespace BlazorApp4.Pages
 
         private List<TaskItem> list2;/*TaskListDB.GetItem("Thuesday").GetAwaiter().GetResult();*/
 
-        protected override void OnInitialized()
-        {
-            list2 = service.taskItems;            
-        }
+
 
         private void Checking()
         {

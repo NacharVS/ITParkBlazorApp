@@ -1,46 +1,60 @@
 ﻿@page "/counter"
+@using System.Timers;
+@implements IDisposable;
 
-@inject SingletonService singleton
-@inject TransientService trancient
+@*@inject SingletonService singleton
+@inject TransientService trancient*@
 
 
-<div class="@styles.Background">
-    <div class="col"><h2 style="color:@styles.Color">Counter</h2></div>
-    <div class="col"><button class="@styles.ButtonStyle" @onclick="styles.ChangeTheme">Switch Dark Theme</button></div>
+
+
+
+<div class="row">
+    @currentCount 
 </div>
 
 
-@for (int i = 0; i < 10; i++)
-{
-<p>Current count: @currentCount</p>
-}
 
-<button class="btn btn-primary" @onclick="@(() => singleton.Inc(ref currentCount))">Click me</button>
-<br>
+
 @*<input @bind-value="currentCount"/>*@
-<ButtonGroup content="list"></ButtonGroup>
 
-<div class="row mt-3">
+
+@*<div class="row mt-3">
     <div class="col-6 text-center alert alert-primary">
         SingletonCount: @singleton.Value
     </div>
     <div class="col-6 text-center alert alert-danger">
         TransientCount: @trancient.Value
     </div>
-</div>
+</div>*@
 
 
 
 @code {
+    Timer timer;
     private int currentCount = 0;
 
-    private List<string> list = new List<string>() { "Add", "Edit", "Remove"};
-    [CascadingParameter] public ApplicationStyles styles { get; set; } = new ApplicationStyles();
-
-    private void IncrementCount()
+    protected override void OnInitialized()
     {
-        trancient.Value = currentCount;
-        singleton.Value += currentCount;
+        timer = new Timer();
+        timer.Interval = 100;
+        timer.Elapsed += IncrementCount;
+        timer.Start();
+    }
+
+    public void IncrementCount(object sender, ElapsedEventArgs e)
+    {
+        currentCount += 1;
+        InvokeAsync(StateHasChanged);
+
+    }
+
+    public void Dispose()
+    {
+        if (timer.Enabled)
+        {
+            timer.Dispose();
+        }
     }
 
     //protected override void OnAfterRender(bool firstRender)
