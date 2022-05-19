@@ -1,0 +1,38 @@
+﻿@page "/dropdown"
+<h3>DropdownList</h3>
+<div class="row border border-primary rounded p-4" >
+    <div class="col-sm-12 col-md-6">
+        <input class="form-control mb-2 " @bind-value="Name" />
+        <input class="form-control mb-2"  @bind-value="Age"/>
+
+        <select @bind="SelectedValue">
+            <option value="-1>\">"select item"</option>
+            @foreach(var item in User.GetList())
+            {
+        <option value="@item.Name">@item.Name</option>
+            }
+        </select>
+        <button @onclick="ButtonCheck"></button>
+    </div>
+
+    <div class="row">
+        <h4>@SelectedValue</h4>
+    </div>
+</div>
+
+
+
+@code {
+    public string Name { get; set; }
+    public string Age { get; set; }
+
+
+    string SelectedValue;
+    public string Value { get; set; }
+
+    private void ButtonCheck()
+    {
+        Console.WriteLine(SelectedValue);
+    }
+
+}
