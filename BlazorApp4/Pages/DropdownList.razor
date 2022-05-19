@@ -1,30 +1,37 @@
 ﻿@page "/dropdown"
 <h3>DropdownList</h3>
-<div class="row border border-primary rounded p-4" >
+<div class="row border border-primary rounded p-4">
     <div class="col-sm-12 col-md-6">
         <input class="form-control mb-2 " @bind-value="Name" />
-        <input class="form-control mb-2"  @bind-value="Age"/>
+        <input class="form-control mb-2" @bind-value="Age" />
 
-        <select @bind="SelectedValue">
+        <select class="form-control" @onchange = "SelectionChaged" >
             <option value="-1>\">"select item"</option>
-            @foreach(var item in User.GetList())
+            @foreach (var item in listUser)
             {
-        <option value="@item.Name">@item.Name</option>
+                <option value="@item.Name">@item.Name</option>
             }
         </select>
-        <button @onclick="ButtonCheck"></button>
+        <button class="btn btn-outline-primary mb-2" @onclick="ButtonCheck">Add In List</button>
     </div>
 
-    <div class="row">
-        <h4>@SelectedValue</h4>
+    <div class="col-sm-12 col-md-6">
+        <h3 mb-2>Name: @name</h3>
+        <h3 mb-2>Surname: @surname</h3>
     </div>
 </div>
 
 
 
 @code {
+
+    List<User> listUser = User.GetList();
+
     public string Name { get; set; }
     public string Age { get; set; }
+
+    string name;
+    string surname;
 
 
     string SelectedValue;
@@ -34,5 +41,12 @@
     {
         Console.WriteLine(SelectedValue);
     }
+
+    private void SelectionChaged(ChangeEventArgs args)
+        {        
+        var buff = listUser.Find(x => x.Name == args.Value.ToString());
+        name = buff.Name;
+        surname = buff.SurName;
+        }
 
 }
