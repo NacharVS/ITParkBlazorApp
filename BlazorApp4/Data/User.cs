@@ -9,11 +9,7 @@ namespace BlazorApp4.Data
 {
     public class User
     {
-        public User(string login, string phoneNumber)
-        {
-            Login = login;
-            PhoneNumber = phoneNumber;
-        }
+
 
         public User(string login, string name, string surname, string phoneNumber)
         {
@@ -25,6 +21,12 @@ namespace BlazorApp4.Data
 
         public User()
         {
+        }
+
+        public User(string name, string surName)
+        {
+            Name = name;
+            SurName = surName;
         }
 
         public ObjectId _id { get; set; }

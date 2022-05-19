@@ -3,16 +3,11 @@
 <div class="row border border-primary rounded p-4">
     <div class="col-sm-12 col-md-6">
         <input class="form-control mb-2 " @bind-value="Name" />
-        <input class="form-control mb-2" @bind-value="Age" />
+        <input class="form-control mb-2" @bind-value="Surname" />
+        <input class="form-control mb-2" @bind-value="TeamName" />
 
-        <select class="form-control" @onchange = "SelectionChaged" >
-            <option value="-1>\">"select item"</option>
-            @foreach (var item in listUser)
-            {
-                <option value="@item.Name">@item.Name</option>
-            }
-        </select>
         <button class="btn btn-outline-primary mb-2" @onclick="ButtonCheck">Add In List</button>
+        <button class="btn btn-outline-danger mb-2" @onclick="ButtonCheck">Add In Team</button>
     </div>
 
     <div class="col-sm-12 col-md-6">
@@ -21,32 +16,57 @@
     </div>
 </div>
 
+<div class="row border border-danger rounded p-4 my-2">
+    <div class="col-sm-12 col-md-6">
+        <select class="form-control" @onchange="SelectionChaged">
+            <option value="-1>\">"select Item"</option>
+            @foreach (var item in listUser)
+            {
+                <option value="@item.Name">@item.Name</option>
+            }
+        </select>
+    </div>
+    <div class="col-sm-12 col-md-6 border-dark">
+        <select class="form-control" @onchange="SelectionChaged">
+            <option value="-1>\">select Team</option>
+            @foreach (var item in listUser)
+            {
+                <option value="@item.Name">@item.Name</option>
+            }
+        </select>
+    </div>
+</div>
 
 
-@code {
 
-    List<User> listUser = User.GetList();
+    @code {
 
-    public string Name { get; set; }
-    public string Age { get; set; }
+        List<User> listUser = User.GetList();
+        List<string> teams = new List<string>();
 
-    string name;
-    string surname;
+        public string Name { get; set; }
+        public string Surname { get; set; }
+        public string TeamName { get; set; }
+
+        string name;
+        string surname;
 
 
-    string SelectedValue;
-    public string Value { get; set; }
+        string SelectedValue;
+        public string Value { get; set; }
 
-    private void ButtonCheck()
-    {
-        Console.WriteLine(SelectedValue);
-    }
-
-    private void SelectionChaged(ChangeEventArgs args)
-        {        
-        var buff = listUser.Find(x => x.Name == args.Value.ToString());
-        name = buff.Name;
-        surname = buff.SurName;
+        private void ButtonCheck()
+        {
+            listUser.Add(new User(Name, Surname));
+            Name = string.Empty;
+            Surname = string.Empty;
         }
 
-}
+        private void SelectionChaged(ChangeEventArgs args)
+        {
+            var buff = listUser.Find(x => x.Name == args.Value.ToString());
+            name = buff.Name;
+            surname = buff.SurName;
+        }
+
+    }
