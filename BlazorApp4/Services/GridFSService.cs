@@ -32,6 +32,8 @@ namespace BlazorApp4.Services
             IGridFSBucket gridFs = new GridFSBucket(database);
             await gridFs.UploadFromStreamAsync("sss.jpg", stream);
 
+
+
         }
 
         public void DownloadImageToWWWRoot(string filename)
@@ -45,8 +47,13 @@ namespace BlazorApp4.Services
                 gridFs.DownloadToStreamByName("qqq.jpg", fs);
                 file = new FileInfo("boot.jpg");
                 Console.WriteLine(file.DirectoryName);
-
+                //*пример с получением id файла и выгрузка из БД по id*
+                //var filter = Builders<GridFSFileInfo>.Filter.Eq(x => x.Filename, "qqq.jpg");
+                //var gridFileInfo = gridFs.Find(filter).FirstOrDefault();
+                //gridFs.DownloadToStream(gridFileInfo.Id, fs);
             }
+
+
         }
     }
 }
