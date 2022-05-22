@@ -33,6 +33,7 @@ namespace BlazorApp4
             services.AddTransient<TransientService>(); // При запросе к сервису создается новый экземпляр сервиса, и каждый новый запрос создает новый экземпляр
             services.AddSingleton<SingletonService>(); // При запросе к сервису создается новый экземпляр сервиса, и каждый новый запрос идёт к одному и тому же  экземпляру
             services.AddSingleton<TaskService>();
+            services.AddTransient<GridFSService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

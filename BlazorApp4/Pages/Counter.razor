@@ -1,12 +1,14 @@
 ﻿@page "/counter"
 @using System.Timers;
 @implements IDisposable;
-
+@inject GridFSService geridFSServ
 @*@inject SingletonService singleton
 @inject TransientService trancient*@
 
 
-
+<div>
+    <button class="btn btn-primary" @onclick="geridFSServ.DownloadImageToWWWRoot">Upload</button>
+</div>
 
 
 <div class="row">
