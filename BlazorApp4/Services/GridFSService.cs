@@ -51,6 +51,13 @@ namespace BlazorApp4.Services
                 //var filter = Builders<GridFSFileInfo>.Filter.Eq(x => x.Filename, "qqq.jpg");
                 //var gridFileInfo = gridFs.Find(filter).FirstOrDefault();
                 //gridFs.DownloadToStream(gridFileInfo.Id, fs);
+
+                //*получение всех имен файлов из GridFS привязанных к базе Images*
+                //var ff= gridFs.Find(Builders<GridFSFileInfo>.Filter.Empty).ToList();
+                // foreach(var item in ff)
+                // {
+                //     Console.WriteLine(item.Filename);
+                // }
             }
 
 
