@@ -5,6 +5,7 @@
 @inject IWebHostEnvironment Environment
 @inject IJSRuntime qqq
 
+
 <h3>Upload Files</h3>
 
 <p>
@@ -51,12 +52,14 @@ else
 
 @code {
     User user = new User();
-
+    [Inject] GridFSService service{ get; set; }
     private List<IBrowserFile> loadedFiles = new();
     private long maxFileSize = 500000;
     private int maxAllowedFiles = 3;
     private bool isLoading;
     protected byte[] img;
+
+
 
     private async Task LoadFiles(InputFileChangeEventArgs e)
     {
@@ -71,11 +74,12 @@ else
 
                 //var trustedFileNameForFileStorage = Path.GetRandomFileName();
                 var stream = file.OpenReadStream(maxFileSize);
-                img = new byte[stream.Length];
-                await stream.ReadAsync(img);
 
+                //img = new byte[stream.Length];
+                //await stream.ReadAsync(img);
+                await service.UploadImageToDBAsync(stream);
                 isLoading = false;
-                ImgToDb.AddToDB(new ImgToDb("RandomName", img));
+                //ImgToDb.AddToDB(new ImgToDb("RandomName", img));
 
             }
 
