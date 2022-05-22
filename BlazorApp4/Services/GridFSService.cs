@@ -11,6 +11,7 @@ namespace BlazorApp4.Services
     public class GridFSService
     {
         const string conectionString = "mongodb://localhost";
+  
         public void UploadImageToDB()
         {
             MongoClient client = new MongoClient(conectionString);
@@ -23,15 +24,15 @@ namespace BlazorApp4.Services
             }
         }
 
-        public void DownloadImageToWWWRoot()
+        public void DownloadImageToWWWRoot(string filename)
         {
             MongoClient client = new MongoClient(conectionString);
             IMongoDatabase database = client.GetDatabase("Images");
             IGridFSBucket gridFs = new GridFSBucket(database);
 
-            using (FileStream fs = new FileStream("C:/Users/KTITS/AppData/temp", FileMode.CreateNew))
+            using (FileStream fs = new FileStream($"E:/repos/ITParkBlazorApp/BlazorApp4/wwwroot/{filename}.jpg", FileMode.CreateNew))
             {
-                gridFs.DownloadToStreamByName("newBoot.jpg", fs);
+                gridFs.DownloadToStreamByName("qqq.jpg", fs);
             }
         }
     }
