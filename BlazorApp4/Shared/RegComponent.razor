@@ -1,14 +1,15 @@
 ﻿<h1>Registration/Authorisation</h1>
+@inject SingletonService singleton
 
 <div class="row borrger border-info">
-    <EditForm Model="client" OnInvalidSubmit="OnInvalid" OnValidSubmit="(()=>RegistrationFlagEvent.InvokeAsync(flag))">
+    <EditForm Model="singleton" OnValidSubmit="(()=>RegistrationFlagEvent.InvokeAsync(flag))">
         <DataAnnotationsValidator />
         <div class="row">
-            <InputText class="form-control" @bind-Value="client.Name"></InputText>
-            <ValidationMessage For="()=>client.Name" />
+            <InputText class="form-control" @bind-Value="singleton.Name"></InputText>
+            <ValidationMessage For="()=>singleton.Name" />
 
         </div>
-        <button class="btn btn-primary">Save</button>
+        <NavLink class="btn btn-primary" @onclick="Refresh" href="index">Save</NavLink>
     </EditForm>
 </div>
 
@@ -17,13 +18,9 @@
     Client client = new Client();
     bool flag;
     [Parameter] public EventCallback RegistrationFlagEvent { get; set; }
-    public void OnInvalid()
-    {
-        Console.WriteLine("Invalid submit");
-    }
 
-    public void OnValid()
+    private void Refresh()
     {
-        Console.WriteLine("Valid submit");
+        InvokeAsync(StateHasChanged);
     }
 }

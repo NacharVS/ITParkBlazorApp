@@ -12,6 +12,8 @@ namespace BlazorApp4
 
     public class SingletonService
     {
+        public string Name { get; set; }
+        public string Surname { get; set; }
         public int Value { get; set; }
 
         public void Inc(ref int increment)

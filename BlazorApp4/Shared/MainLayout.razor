@@ -1,5 +1,5 @@
 ﻿@inherits LayoutComponentBase
-@*@inject TaskService service*@
+@inject SingletonService singleton
 
 <div class="sidebar">
     <NavMenu />
@@ -7,26 +7,36 @@
 
 
 <div class="main">
-    <div class="top-row">
-        <div class="col text-right">
-            sdfsdff
+    @if (singleton.Name != null)
+    {
+        <div class="top-row">
+            <div class="col text-right">
+                @singleton.Name
+            </div>
+            <div class="col text-center">
+                @singleton.Surname
+            </div>
         </div>
-        <div class="col text-center">
-            <a class="btn btn secondary" href="counter">@Login</a>
+    }
+    else
+    {
+        <div class="top-row">
+            <div class="col text-right">
+               <NavLink class="col-form-label-lg" href="regist">Sign In</NavLink>
+            </div>
+            <div class="col text-center">
+                <a class="btn btn secondary" href="counter">@Login</a>
+            </div>
         </div>
-        <div class="col text-center">
-            <a href="https://docs.microsoft.com/aspnet/" target="_top">About</a>
-        </div>
-
-    </div>
+    }
 
     <div class="content px-4">
         <CascadingValue Value="styles">
-                @Body
+            @Body
         </CascadingValue>
 
 
-     
+
     </div>
 </div>
 
@@ -35,6 +45,7 @@
 @code{
     public string Login = User.GetList()[0].Login;
     public ApplicationStyles styles = new ApplicationStyles();
+    
 
 
 }
