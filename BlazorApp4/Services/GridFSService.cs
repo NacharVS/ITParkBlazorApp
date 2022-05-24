@@ -36,6 +36,21 @@ namespace BlazorApp4.Services
 
         }
 
+        public async Task ReplaceImage()
+        {
+            MongoClient client = new MongoClient(conectionString);
+            IMongoDatabase database = client.GetDatabase("Images");
+            IGridFSBucket gridFs = new GridFSBucket(database);
+            var filter = Builders<GridFSFileInfo>.Filter.Eq(x => x.Filename, "qqq.jpg");
+            var gridFileInfo = gridFs.Find(filter).FirstOrDefault();
+            var id = gridFileInfo.Id;
+            await gridFs.DeleteAsync(id);
+            using (FileStream fs = new FileStream("E:/repos/ITParkBlazorApp/BlazorApp4/wwwroot/boot.jpg", FileMode.Open))
+            {
+                await gridFs.UploadFromStreamAsync("qqq.jpg", fs);
+            }
+        }
+
         public void DownloadImageToWWWRoot(string filename)
         {
             MongoClient client = new MongoClient(conectionString);
