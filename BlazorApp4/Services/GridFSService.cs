@@ -42,7 +42,7 @@ namespace BlazorApp4.Services
             IMongoDatabase database = client.GetDatabase("Images");
             IGridFSBucket gridFs = new GridFSBucket(database);
 
-            using (Stream fs = new FileStream($"E:/repos/ITParkBlazorApp/BlazorApp4/wwwroot/{filename}.jpg", FileMode.CreateNew))
+            using (Stream fs = new FileStream($"{Directory.CreateDirectory(Directory.GetCurrentDirectory() + "/images/")}{filename}.jpg", FileMode.CreateNew))
             {
                 gridFs.DownloadToStreamByName("qqq.jpg", fs);
                 file = new FileInfo("boot.jpg");
