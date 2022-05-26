@@ -1,0 +1,27 @@
+﻿@page "/quest"
+<h3>Questions</h3>
+@foreach(var item in list) { 
+<div class="row border border-primary rounded p-2">
+    @item.Question
+    @foreach (var ans in item.MyProperty)
+    {
+        <AnswerButton Answer="@ans.PossibleAnswer" WrondRightAnswer="@ans.IsRight" AnswerEvent="(()=>Check(ans.IsRight))"></AnswerButton>
+    }
+</div>
+}
+
+@code {
+    List<QuestionsA> list = QuestionsA.GenerateQuestions();
+
+    private void Check(bool flag)
+    {
+        if (flag)
+        {
+            Console.WriteLine("Right!");
+        }
+        else
+        {
+            Console.WriteLine("Wrong!");
+        }
+    }
+}

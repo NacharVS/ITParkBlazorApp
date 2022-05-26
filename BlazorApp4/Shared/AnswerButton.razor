@@ -1,0 +1,6 @@
+﻿<button class="btn btn-primary mx-2" @onclick="AnswerEvent">@Answer</button>
+@code {
+    [Parameter] public string Answer { get; set; }
+    [Parameter] public bool WrondRightAnswer { get; set; }
+    [Parameter] public EventCallback AnswerEvent { get; set; }
+}
