@@ -6,10 +6,14 @@
         @*<label>@item.Count</label><button @onclick="Another">+</button>*@
         <label class="form-check">First List</label>
         <ul class="list-group">
-            
+
             @foreach (var item in listToShow1)
             {
-                <li class="list-group-item"><button class="btn btn-primary" @onclick="(()=>Replace(item.Name))">Add @item.Name to Team</button></li>
+                <li class="list-group-item">
+                    <button class="btn btn-primary" @onclick="(()=>IncrementCount(item.Name))">+</button>   
+                    @item.Count
+                    <button class="btn btn-primary" @onclick="(()=>Replace(item.Name))">-</button>
+                </li>
             }
         </ul>
     </div>
@@ -18,7 +22,7 @@
         <ul class="list-group">
             @foreach (var item in listToShow2)
             {
-                <li class="list-group-item"><label class="form-check">@item.Name @item.SurName</label></li>
+                <li class="list-group-item"><button class="btn btn-danger">Remove @item.Name @item.SurName from TEam</button></li>
             }
         </ul>
     </div>
@@ -40,9 +44,16 @@
     }
     private void Replace(string newItem)
     {
-        var current = listToShow1.Find(x => x.Name == newItem).Name;
+        var current = listToShow1.Find(x => x.Name == newItem);
         listToShow2.Add(current);
         listToShow1.Remove(current);
+    }
+
+    private void IncrementCount(string currentName)
+    {
+        var currentItem = listToShow1.Find(x => x.Name == currentName);
+        currentItem.Inc();
+        InvokeAsync(StateHasChanged);
     }
 
 
