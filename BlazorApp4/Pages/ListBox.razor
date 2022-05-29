@@ -3,6 +3,7 @@
 
 <div class="row">
     <div class="col">
+        @*<label>@item.Count</label><button @onclick="Another">+</button>*@
         <label class="form-check">First List</label>
         <ul class="list-group">
             
@@ -17,7 +18,7 @@
         <ul class="list-group">
             @foreach (var item in listToShow2)
             {
-                <li class="list-group-item"><label class="form-check">@item.Name</label></li>
+                <li class="list-group-item"><label class="form-check">@item.Name @item.SurName</label></li>
             }
         </ul>
     </div>
@@ -33,10 +34,15 @@
 
     }
 
+    private void Another()
+    {
+
+    }
     private void Replace(string newItem)
     {
-        //listToShow2.Add(newItem);
-        //listToShow.Remove(newItem);
+        var current = listToShow1.Find(x => x.Name == newItem).Name;
+        listToShow2.Add(current);
+        listToShow1.Remove(current);
     }
 
 
