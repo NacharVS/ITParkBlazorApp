@@ -1,0 +1,43 @@
+﻿@page "/list"
+<h3>ListBox</h3>
+
+<div class="row">
+    <div class="col">
+        <label class="form-check">First List</label>
+        <ul class="list-group">
+            
+            @foreach (var item in listToShow1)
+            {
+                <li class="list-group-item"><button class="btn btn-primary" @onclick="(()=>Replace(item.Name))">Add @item.Name to Team</button></li>
+            }
+        </ul>
+    </div>
+    <div class="col">
+        <label class="form-check">Team</label>
+        <ul class="list-group">
+            @foreach (var item in listToShow2)
+            {
+                <li class="list-group-item"><label class="form-check">@item.Name</label></li>
+            }
+        </ul>
+    </div>
+</div>
+
+@code {
+    List<User> listToShow1 ;
+    List<User> listToShow2 = new();
+
+    protected override void OnInitialized()
+    {
+        listToShow1 = User.GetList();
+
+    }
+
+    private void Replace(string newItem)
+    {
+        //listToShow2.Add(newItem);
+        //listToShow.Remove(newItem);
+    }
+
+
+}

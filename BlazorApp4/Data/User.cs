@@ -34,6 +34,8 @@ namespace BlazorApp4.Data
         public string Name { get; set; }
         public string SurName { get; set; }
         public string PhoneNumber { get; set; }
+
+        public static List<Team> Teams;
         public byte[] img;
 
 
